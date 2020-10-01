@@ -15,7 +15,7 @@ namespace EightCare.UnitTests
         }
 
         [Fact]
-        public void New_KeeperCreated()
+        public void New_ShouldCreateKeeper()
         {
             // Arrange
             var name = _fixture.Create<string>();
@@ -30,6 +30,20 @@ namespace EightCare.UnitTests
             keeper.Name.Should().Be(name);
             keeper.Email.Should().Be(email);
             keeper.Age.Should().Be(age);
+        }
+
+        [Fact]
+        public void AddAnimal_ShouldAddAnimal()
+        {
+            // Arrange
+            var keeper = _fixture.Create<Keeper>();
+            var animal = _fixture.Create<Animal>();
+
+            // Act
+            keeper.AddAnimal(animal);
+
+            // Assert
+            keeper.Animals.Should().Contain(animal);
         }
     }
 }
