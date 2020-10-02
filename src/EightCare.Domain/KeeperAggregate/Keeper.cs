@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace EightCare.Domain
+namespace EightCare.Domain.KeeperAggregate
 {
     public sealed class Keeper
     {

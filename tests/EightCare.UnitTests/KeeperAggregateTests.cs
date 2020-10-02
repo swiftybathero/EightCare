@@ -1,5 +1,5 @@
 using AutoFixture;
-using EightCare.Domain;
+using EightCare.Domain.KeeperAggregate;
 using FluentAssertions;
 using Xunit;
 
