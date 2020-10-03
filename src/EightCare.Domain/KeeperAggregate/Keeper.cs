@@ -1,8 +1,9 @@
+using EightCare.Domain.Common;
 using System.Collections.Generic;
 
 namespace EightCare.Domain.KeeperAggregate
 {
-    public sealed class Keeper
+    public sealed class Keeper : Entity
     {
         private readonly List<Animal> _animals;
 
