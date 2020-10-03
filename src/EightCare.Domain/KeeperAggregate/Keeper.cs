@@ -21,9 +21,11 @@ namespace EightCare.Domain.KeeperAggregate
             _animals = new List<Animal>();
         }
 
-        public void AddAnimal(Animal animal)
+        public void AddNewAnimal(string commonName, string scientificName)
         {
-            _animals.Add(animal);
+            var newAnimal = new Animal(commonName, scientificName);
+
+            _animals.Add(newAnimal);
         }
     }
 }
