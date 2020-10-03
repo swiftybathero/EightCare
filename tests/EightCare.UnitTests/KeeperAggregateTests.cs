@@ -1,5 +1,5 @@
 using AutoFixture;
-using EightCare.Domain;
+using EightCare.Domain.KeeperAggregate;
 using FluentAssertions;
 using Xunit;
 
@@ -37,13 +37,13 @@ namespace EightCare.UnitTests
         {
             // Arrange
             var keeper = _fixture.Create<Keeper>();
-            var animal = _fixture.Create<Animal>();
+            var expectedAnimal = _fixture.Create<Animal>();
 
             // Act
-            keeper.AddAnimal(animal);
+            keeper.AddNewAnimal(expectedAnimal.CommonName, expectedAnimal.ScientificName);
 
             // Assert
-            keeper.Animals.Should().Contain(animal);
+            keeper.Animals.Should().ContainEquivalentOf(expectedAnimal, config => config.ComparingByMembers<Animal>());
         }
     }
 }

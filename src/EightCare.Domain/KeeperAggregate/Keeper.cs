@@ -1,8 +1,9 @@
+using EightCare.Domain.Common;
 using System.Collections.Generic;
 
-namespace EightCare.Domain
+namespace EightCare.Domain.KeeperAggregate
 {
-    public sealed class Keeper
+    public sealed class Keeper : Entity
     {
         private readonly List<Animal> _animals;
 
@@ -20,9 +21,11 @@ namespace EightCare.Domain
             _animals = new List<Animal>();
         }
 
-        public void AddAnimal(Animal animal)
+        public void AddNewAnimal(string commonName, string scientificName)
         {
-            _animals.Add(animal);
+            var newAnimal = new Animal(commonName, scientificName);
+
+            _animals.Add(newAnimal);
         }
     }
 }
