@@ -40,7 +40,7 @@ namespace EightCare.UnitTests
             var expectedAnimal = _fixture.Create<Animal>();
 
             // Act
-            keeper.AddNewAnimal(expectedAnimal.CommonName, expectedAnimal.ScientificName);
+            keeper.AddNewAnimal(expectedAnimal.ScientificName, expectedAnimal.CommonName);
 
             // Assert
             keeper.Animals.Should().ContainEquivalentOf(expectedAnimal, config => config.ComparingByMembers<Animal>());

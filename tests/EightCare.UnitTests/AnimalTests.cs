@@ -18,16 +18,16 @@ namespace EightCare.UnitTests
         public void New_ShouldCreateAnimal()
         {
             // Arrange
-            var commonName = _fixture.Create<string>();
             var scientificName = _fixture.Create<string>();
+            var commonName = _fixture.Create<string>();
 
             // Act
-            var animal = new Animal(commonName, scientificName);
+            var animal = new Animal(scientificName, commonName);
 
             // Assert
             animal.Should().NotBeNull();
-            animal.CommonName.Should().Be(commonName);
             animal.ScientificName.Should().Be(scientificName);
+            animal.CommonName.Should().Be(commonName);
         }
     }
 }
