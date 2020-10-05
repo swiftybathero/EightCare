@@ -1,4 +1,5 @@
 using AutoFixture;
+using EightCare.Domain.Exceptions;
 using EightCare.Domain.KeeperAggregate;
 using FluentAssertions;
 using Xunit;
@@ -33,17 +34,31 @@ namespace EightCare.UnitTests
         }
 
         [Fact]
-        public void AddAnimal_ShouldAddAnimal()
+        public void AddNewAnimal_ShouldAddAnimal()
         {
             // Arrange
             var keeper = _fixture.Create<Keeper>();
             var expectedAnimal = _fixture.Create<Animal>();
 
             // Act
-            keeper.AddNewAnimal(expectedAnimal.CommonName, expectedAnimal.ScientificName);
+            keeper.AddNewAnimal(expectedAnimal.ScientificName, expectedAnimal.CommonName);
 
             // Assert
             keeper.Animals.Should().ContainEquivalentOf(expectedAnimal, config => config.ComparingByMembers<Animal>());
+        }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        public void AddNewAnimal_NoScientificName_ShouldThrowDomainException(string scientificName)
+        {
+            // Arrange
+            var keeper = _fixture.Create<Keeper>();
+
+            // Act // Assert
+            keeper.Invoking(x => x.AddNewAnimal(scientificName, _fixture.Create<string>()))
+                  .Should()
+                  .Throw<KeeperDomainException>();
         }
     }
 }
