@@ -1,5 +1,8 @@
-﻿namespace EightCare.Domain.Common
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace EightCare.Domain.Common
 {
+    [ExcludeFromCodeCoverage]
     public abstract class Entity
     {
         public long Id { get; protected set; }
