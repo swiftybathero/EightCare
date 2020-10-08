@@ -1,5 +1,8 @@
-﻿namespace EightCare.Domain.Common
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace EightCare.Domain.Common
 {
+    [ExcludeFromCodeCoverage]
     public abstract class ValueObject<T>
         where T : ValueObject<T>
     {
