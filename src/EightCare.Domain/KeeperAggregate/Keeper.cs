@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace EightCare.Domain.KeeperAggregate
 {
-    public sealed class Keeper : Entity
+    public sealed class Keeper : Entity, IAggregateRoot
     {
         private readonly List<Animal> _animals;
 
-        public string Name { get; }
-        public string Email { get; }
-        public int Age { get; }
+        public string Name { get; private set; }
+        public string Email { get; private set; }
+        public int Age { get; private set; }
         public IReadOnlyCollection<Animal> Animals => _animals.AsReadOnly();
 
         public Keeper(string name, string email, int age)

@@ -3,7 +3,7 @@ using EightCare.Domain.Exceptions;
 
 namespace EightCare.Domain.KeeperAggregate
 {
-    public sealed class Animal : Entity, IAggregateRoot
+    public sealed class Animal : Entity
     {
         public string ScientificName { get; private set; }
         public string CommonName { get; private set; }
