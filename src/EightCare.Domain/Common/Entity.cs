@@ -5,7 +5,9 @@ namespace EightCare.Domain.Common
     [ExcludeFromCodeCoverage]
     public abstract class Entity
     {
-        public long Id { get; protected set; }
+        public int Id { get; protected set; }
+
+        public void SetId(int id) => Id = id;
 
         public override bool Equals(object obj)
         {

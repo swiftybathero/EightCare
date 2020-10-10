@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EightCare.UnitTests", "..\t
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EightCare.Domain", "EightCare.Domain\EightCare.Domain.csproj", "{49D4CA39-AA7F-4B4F-8AED-0A3DD158623E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{CB2A165B-77DF-4FD5-8223-62D73E873A3E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "tests", "{CB2A165B-77DF-4FD5-8223-62D73E873A3E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
