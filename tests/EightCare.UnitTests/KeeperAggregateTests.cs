@@ -1,7 +1,10 @@
 using AutoFixture;
 using EightCare.Domain.Exceptions;
 using EightCare.Domain.KeeperAggregate;
+using EightCare.UnitTests.Builders;
 using FluentAssertions;
+using System;
+using System.Linq;
 using Xunit;
 
 namespace EightCare.UnitTests
@@ -9,10 +12,12 @@ namespace EightCare.UnitTests
     public class KeeperAggregateTests
     {
         private readonly IFixture _fixture;
+        private readonly KeeperBuilder _keeperBuilder;
 
         public KeeperAggregateTests()
         {
             _fixture = new Fixture();
+            _keeperBuilder = new KeeperBuilder();
         }
 
         [Fact]
@@ -37,14 +42,15 @@ namespace EightCare.UnitTests
         public void AddNewAnimal_ShouldAddAnimal()
         {
             // Arrange
-            var keeper = _fixture.Create<Keeper>();
+            var keeper = _keeperBuilder.Create();
             var expectedAnimal = _fixture.Create<Animal>();
 
             // Act
-            keeper.AddNewAnimal(expectedAnimal.ScientificName, expectedAnimal.CommonName);
+            var createdAnimal = keeper.AddNewAnimal(expectedAnimal.ScientificName, expectedAnimal.CommonName);
 
             // Assert
-            keeper.Animals.Should().ContainEquivalentOf(expectedAnimal, config => config.ComparingByMembers<Animal>());
+            createdAnimal.Should().BeEquivalentTo(expectedAnimal, options => options.ComparingByMembers<Animal>());
+            keeper.Animals.Should().Contain(createdAnimal);
         }
 
         [Theory]
@@ -53,10 +59,54 @@ namespace EightCare.UnitTests
         public void AddNewAnimal_NoScientificName_ShouldThrowDomainException(string scientificName)
         {
             // Arrange
-            var keeper = _fixture.Create<Keeper>();
+            var keeper = _keeperBuilder.Create();
 
             // Act // Assert
             keeper.Invoking(x => x.AddNewAnimal(scientificName, _fixture.Create<string>()))
+                  .Should()
+                  .Throw<KeeperDomainException>();
+        }
+
+        [Fact]
+        public void FeedAnimal_AnimalExists_ShouldFeedAnimal()
+        {
+            // Arrange
+            var existingAnimalId = _fixture.Create<int>();
+            var feedingDate = _fixture.Create<DateTime>();
+            var keeper = _keeperBuilder.BuildDefault().WithAnimals(existingAnimalId).Create();
+            var animal = keeper.Animals.First(x => x.Id == existingAnimalId);
+
+            // Act
+            keeper.FeedAnimal(existingAnimalId, 1, feedingDate);
+
+            // Assert
+            animal.Feedings.Should().ContainSingle(x => x.Date == feedingDate && x.Amount == 1);
+        }
+
+        [Fact]
+        public void FeedAnimal_AnimalDoesNotExist_ShouldThrowException()
+        {
+            // Arrange
+            var keeper = _keeperBuilder.BuildDefault().WithAnimals().Create();
+            var notExistingAnimalId = _fixture.Create<int>();
+
+            // Act // Assert
+            keeper.Invoking(x => x.FeedAnimal(notExistingAnimalId))
+                  .Should()
+                  .Throw<KeeperDomainException>();
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(-1)]
+        public void FeedAnimal_AmountLowerThanOne_ShouldThrowException(int amount)
+        {
+            // Arrange
+            var existingAnimalId = _fixture.Create<int>();
+            var keeper = _keeperBuilder.BuildDefault().WithAnimals(existingAnimalId).Create();
+
+            // Act // Assert
+            keeper.Invoking(x => x.FeedAnimal(existingAnimalId, amount))
                   .Should()
                   .Throw<KeeperDomainException>();
         }
