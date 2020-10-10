@@ -6,14 +6,12 @@ namespace EightCare.Domain.KeeperAggregate
     public sealed class Feeding : Entity
     {
         public DateTime Date { get; private set; }
-        public Feed Feed { get; private set; }
-        public int Count { get; private set; }
+        public int Amount { get; private set; }
 
-        public Feeding(DateTime date, Feed feed, int count)
+        public Feeding(DateTime date, int amount)
         {
             Date = date;
-            Feed = feed;
-            Count = count;
+            Amount = amount;
         }
     }
 }

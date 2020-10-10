@@ -1,5 +1,8 @@
 using EightCare.Domain.Common;
+using EightCare.Domain.Exceptions;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace EightCare.Domain.KeeperAggregate
 {
@@ -26,6 +29,21 @@ namespace EightCare.Domain.KeeperAggregate
             var newAnimal = new Animal(scientificName, commonName);
 
             _animals.Add(newAnimal);
+        }
+
+        public void FeedAnimal(int animalId, int amount = 1, DateTime? feedingDate = null)
+        {
+            var animalToFeed = FindAnimalById(animalId);
+
+            if (animalToFeed == null)
+                throw new KeeperDomainException($"Animal with {animalId} could not be found.");
+
+            animalToFeed.Feed(amount, feedingDate);
+        }
+
+        private Animal FindAnimalById(int animalId)
+        {
+            return _animals.FirstOrDefault(x => x.Id == animalId);
         }
     }
 }
