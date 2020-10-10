@@ -73,16 +73,35 @@ namespace EightCare.UnitTests
         public void FeedAnimal_AnimalExists_ShouldFeedAnimal()
         {
             // Arrange
+            const int FeedAmount = 1;
+
             var existingAnimalId = _fixture.Create<int>();
             var feedingDate = _fixture.Create<DateTime>();
             var keeper = _keeperBuilder.BuildDefault().WithAnimals(existingAnimalId).Create();
             var animal = keeper.Animals.First(x => x.Id == existingAnimalId);
 
             // Act
-            keeper.FeedAnimal(existingAnimalId, 1, feedingDate);
+            keeper.FeedAnimal(existingAnimalId, FeedAmount, feedingDate);
 
             // Assert
-            animal.Feedings.Should().ContainSingle(x => x.Date == feedingDate && x.Amount == 1);
+            animal.Feedings.Should().ContainSingle(x => x.Date == feedingDate && x.Amount == FeedAmount);
+        }
+
+        [Fact]
+        public void FeedAnimal_NoParameters_ShouldFeedAnimalWithDefaultValues()
+        {
+            // Arrange
+            const int ExpectedDefaultAmount = 1;
+
+            var existingAnimalId = _fixture.Create<int>();
+            var keeper = _keeperBuilder.BuildDefault().WithAnimals(existingAnimalId).Create();
+            var animal = keeper.Animals.First(x => x.Id == existingAnimalId);
+
+            // Act
+            keeper.FeedAnimal(existingAnimalId);
+
+            // Assert
+            animal.Feedings.Should().ContainSingle(x => x.Date != default && x.Amount == ExpectedDefaultAmount);
         }
 
         [Fact]

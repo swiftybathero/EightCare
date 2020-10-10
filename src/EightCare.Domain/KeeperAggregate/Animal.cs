@@ -40,9 +40,7 @@ namespace EightCare.Domain.KeeperAggregate
             if (amount < 1)
                 throw new KeeperDomainException(ExceptionMessages.FeedAmountCannotBeLowerThanOne);
 
-            var feeding = new Feeding(feedingDate ?? DateTime.Now, amount);
-
-            _feedings.Add(feeding);
+            _feedings.Add(new Feeding(feedingDate ?? DateTime.Now, amount));
         }
     }
 }
