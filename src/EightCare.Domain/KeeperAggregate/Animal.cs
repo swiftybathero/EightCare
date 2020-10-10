@@ -1,5 +1,6 @@
 using EightCare.Domain.Common;
 using EightCare.Domain.Exceptions;
+using EightCare.Domain.Properties;
 using System;
 using System.Collections.Generic;
 
@@ -24,7 +25,7 @@ namespace EightCare.Domain.KeeperAggregate
         private void SetScientificName(string scientificName)
         {
             if (string.IsNullOrEmpty(scientificName))
-                throw new KeeperDomainException("Scientific Name cannot be empty.");
+                throw new KeeperDomainException(ExceptionMessages.ScientificNameCannotBeEmpty);
 
             ScientificName = scientificName;
         }
@@ -37,7 +38,7 @@ namespace EightCare.Domain.KeeperAggregate
         public void Feed(int amount = 1, DateTime? feedingDate = null)
         {
             if (amount < 1)
-                throw new KeeperDomainException("Amount of feed can't be lower than 1.");
+                throw new KeeperDomainException(ExceptionMessages.FeedAmountCannotBeLowerThanOne);
 
             _feedings.Add(new Feeding(feedingDate ?? DateTime.Now, amount));
         }

@@ -1,5 +1,6 @@
 using EightCare.Domain.Common;
 using EightCare.Domain.Exceptions;
+using EightCare.Domain.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,7 +39,7 @@ namespace EightCare.Domain.KeeperAggregate
             var animalToFeed = FindAnimalById(animalId);
 
             if (animalToFeed == null)
-                throw new KeeperDomainException($"Animal with {animalId} could not be found.");
+                throw new KeeperDomainException(string.Format(ExceptionMessages.AnimalNotFound, animalId));
 
             animalToFeed.Feed(amount, feedingDate);
         }

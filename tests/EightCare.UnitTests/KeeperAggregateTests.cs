@@ -1,6 +1,7 @@
 using AutoFixture;
 using EightCare.Domain.Exceptions;
 using EightCare.Domain.KeeperAggregate;
+using EightCare.Domain.Properties;
 using EightCare.UnitTests.Builders;
 using FluentAssertions;
 using System;
@@ -64,7 +65,8 @@ namespace EightCare.UnitTests
             // Act // Assert
             keeper.Invoking(x => x.AddNewAnimal(scientificName, _fixture.Create<string>()))
                   .Should()
-                  .Throw<KeeperDomainException>();
+                  .Throw<KeeperDomainException>()
+                  .WithMessage(ExceptionMessages.ScientificNameCannotBeEmpty);
         }
 
         [Fact]
@@ -93,7 +95,8 @@ namespace EightCare.UnitTests
             // Act // Assert
             keeper.Invoking(x => x.FeedAnimal(notExistingAnimalId))
                   .Should()
-                  .Throw<KeeperDomainException>();
+                  .Throw<KeeperDomainException>()
+                  .WithMessage(string.Format(ExceptionMessages.AnimalNotFound, notExistingAnimalId));
         }
 
         [Theory]
@@ -108,7 +111,8 @@ namespace EightCare.UnitTests
             // Act // Assert
             keeper.Invoking(x => x.FeedAnimal(existingAnimalId, amount))
                   .Should()
-                  .Throw<KeeperDomainException>();
+                  .Throw<KeeperDomainException>()
+                  .WithMessage(ExceptionMessages.FeedAmountCannotBeLowerThanOne);
         }
     }
 }
