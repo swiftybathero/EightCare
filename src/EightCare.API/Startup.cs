@@ -19,6 +19,8 @@ namespace EightCare.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddSwaggerGen();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -30,6 +32,13 @@ namespace EightCare.API
             }
 
             app.UseHttpsRedirection();
+
+            app.UseSwagger()
+               .UseSwaggerUI(setup =>
+               {
+                   setup.SwaggerEndpoint("/swagger/v1/swagger.json", "EightCare API V1");
+                   setup.RoutePrefix = string.Empty;
+               });
 
             app.UseRouting();
 
