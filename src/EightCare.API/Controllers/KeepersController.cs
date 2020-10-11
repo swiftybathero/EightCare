@@ -4,6 +4,7 @@ using EightCare.API.Models;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace EightCare.API.Controllers
 {
@@ -21,9 +22,9 @@ namespace EightCare.API.Controllers
         [HttpPost]
         [ProducesDefaultResponseType]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public IActionResult RegisterKeeper([FromBody] RegisterKeeperModel registerKeeperModel)
+        public async Task<IActionResult> RegisterKeeper([FromBody] RegisterKeeperModel registerKeeperModel)
         {
-            var createdKeeperId = _mediator.Send(new RegisterKeeperCommand
+            var createdKeeperId = await _mediator.Send(new RegisterKeeperCommand
             (
                 registerKeeperModel.Name,
                 registerKeeperModel.Email,
