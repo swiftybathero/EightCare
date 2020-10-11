@@ -34,7 +34,7 @@ namespace EightCare.Domain.KeeperAggregate
             return newAnimal;
         }
 
-        public void FeedAnimal(int animalId, int amount = 1, DateTime? feedingDate = null)
+        public void FeedAnimal(Guid animalId, int amount = 1, DateTime? feedingDate = null)
         {
             var animalToFeed = FindAnimalById(animalId);
 
@@ -44,7 +44,7 @@ namespace EightCare.Domain.KeeperAggregate
             animalToFeed.Feed(amount, feedingDate);
         }
 
-        private Animal FindAnimalById(int animalId)
+        private Animal FindAnimalById(Guid animalId)
         {
             return _animals.FirstOrDefault(x => x.Id == animalId);
         }

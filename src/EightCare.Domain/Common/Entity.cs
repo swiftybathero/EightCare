@@ -1,13 +1,14 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace EightCare.Domain.Common
 {
     [ExcludeFromCodeCoverage]
     public abstract class Entity
     {
-        public int Id { get; protected set; }
+        public Guid Id { get; protected set; }
 
-        public void SetId(int id) => Id = id;
+        public void SetId(Guid id) => Id = id;
 
         public override bool Equals(object obj)
         {
@@ -20,7 +21,7 @@ namespace EightCare.Domain.Common
             if (GetType() != other.GetType())
                 return false;
 
-            if (Id == 0 || other.Id == 0)
+            if (Id == Guid.Empty || other.Id == Guid.Empty)
                 return false;
 
             return Id == other.Id;

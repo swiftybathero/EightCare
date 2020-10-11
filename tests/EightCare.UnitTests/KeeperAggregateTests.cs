@@ -75,7 +75,7 @@ namespace EightCare.UnitTests
             // Arrange
             const int FeedAmount = 1;
 
-            var existingAnimalId = _fixture.Create<int>();
+            var existingAnimalId = _fixture.Create<Guid>();
             var feedingDate = _fixture.Create<DateTime>();
             var keeper = _keeperBuilder.BuildDefault().WithAnimals(existingAnimalId).Create();
             var animal = keeper.Animals.First(x => x.Id == existingAnimalId);
@@ -93,7 +93,7 @@ namespace EightCare.UnitTests
             // Arrange
             const int ExpectedDefaultAmount = 1;
 
-            var existingAnimalId = _fixture.Create<int>();
+            var existingAnimalId = _fixture.Create<Guid>();
             var keeper = _keeperBuilder.BuildDefault().WithAnimals(existingAnimalId).Create();
             var animal = keeper.Animals.First(x => x.Id == existingAnimalId);
 
@@ -109,7 +109,7 @@ namespace EightCare.UnitTests
         {
             // Arrange
             var keeper = _keeperBuilder.BuildDefault().WithAnimals().Create();
-            var notExistingAnimalId = _fixture.Create<int>();
+            var notExistingAnimalId = _fixture.Create<Guid>();
 
             // Act // Assert
             keeper.Invoking(x => x.FeedAnimal(notExistingAnimalId))
@@ -124,7 +124,7 @@ namespace EightCare.UnitTests
         public void FeedAnimal_AmountLowerThanOne_ShouldThrowException(int amount)
         {
             // Arrange
-            var existingAnimalId = _fixture.Create<int>();
+            var existingAnimalId = _fixture.Create<Guid>();
             var keeper = _keeperBuilder.BuildDefault().WithAnimals(existingAnimalId).Create();
 
             // Act // Assert
