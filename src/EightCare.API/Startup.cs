@@ -1,9 +1,14 @@
+using EightCare.Domain.Common;
+using EightCare.Domain.KeeperAggregate.Abstractions;
+using EightCare.Infrastructure.Repositories;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Reflection;
 
 namespace EightCare.API
 {
@@ -21,6 +26,11 @@ namespace EightCare.API
             services.AddControllers();
 
             services.AddSwaggerGen();
+
+            services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
+
+            services.AddSingleton<KeeperInMemoryContext>();
+            services.AddScoped<IKeeperRepository, InMemoryKeeperRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

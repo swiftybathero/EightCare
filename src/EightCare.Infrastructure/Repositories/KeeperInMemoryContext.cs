@@ -1,15 +1,16 @@
-﻿using EightCare.Domain.KeeperAggregate;
+﻿using EightCare.Domain.Common;
+using EightCare.Domain.KeeperAggregate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace EightCare.Infrastructure.Repositories
 {
-    public sealed class KeeperUnitOfWork : IKeeperUnitOfWork
+    public sealed class KeeperInMemoryContext : IUnitOfWork
     {
         public List<Keeper> Keepers { get; }
 
-        public KeeperUnitOfWork()
+        public KeeperInMemoryContext()
         {
             Keepers = new List<Keeper>();
         }

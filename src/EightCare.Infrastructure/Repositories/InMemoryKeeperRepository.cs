@@ -8,25 +8,25 @@ namespace EightCare.Infrastructure.Repositories
 {
     public sealed class InMemoryKeeperRepository : IKeeperRepository
     {
-        private readonly IKeeperUnitOfWork _unitOfWork;
+        private readonly KeeperInMemoryContext _context;
 
-        public IUnitOfWork UnitOfWork => _unitOfWork;
+        public IUnitOfWork UnitOfWork => _context;
 
-        public InMemoryKeeperRepository(IKeeperUnitOfWork unitOfWork)
+        public InMemoryKeeperRepository(KeeperInMemoryContext context)
         {
-            _unitOfWork = unitOfWork;
+            _context = context;
         }
 
         public Keeper GetById(Guid keeperId)
         {
-            return _unitOfWork.Keepers.FirstOrDefault(x => x.Id == keeperId);
+            return _context.Keepers.FirstOrDefault(x => x.Id == keeperId);
         }
 
         public void Add(Keeper keeper)
         {
             keeper.SetId(Guid.Empty);
 
-            _unitOfWork.Keepers.Add(keeper);
+            _context.Keepers.Add(keeper);
         }
 
         public void Update(Keeper keeper)
@@ -34,8 +34,8 @@ namespace EightCare.Infrastructure.Repositories
             if (keeper.Id == Guid.Empty)
                 throw new ArgumentException("Keeper without Id cannot be updated.");
 
-            _unitOfWork.Keepers.Remove(keeper);
-            _unitOfWork.Keepers.Add(keeper);
+            _context.Keepers.Remove(keeper);
+            _context.Keepers.Add(keeper);
         }
 
         public void Delete(Keeper keeper)
@@ -43,7 +43,7 @@ namespace EightCare.Infrastructure.Repositories
             if (keeper.Id == Guid.Empty)
                 throw new ArgumentException("Keeper without Id cannot be removed.");
 
-            _unitOfWork.Keepers.Remove(keeper);
+            _context.Keepers.Remove(keeper);
         }
     }
 }
