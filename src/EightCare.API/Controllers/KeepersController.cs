@@ -1,5 +1,6 @@
 ﻿using EightCare.API.Commands;
 using EightCare.API.Constants;
+using EightCare.API.Models;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,9 +21,14 @@ namespace EightCare.API.Controllers
         [HttpPost]
         [ProducesDefaultResponseType]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public IActionResult RegisterKeeper([FromBody] RegisterKeeperCommand command)
+        public IActionResult RegisterKeeper([FromBody] RegisterKeeperModel registerKeeperModel)
         {
-            var createdKeeperId = _mediator.Send(command);
+            var createdKeeperId = _mediator.Send(new RegisterKeeperCommand
+            (
+                registerKeeperModel.Name,
+                registerKeeperModel.Email,
+                registerKeeperModel.Age
+            ));
 
             return Created(Routes.KeeperRoute + $"/{createdKeeperId}", new { id = createdKeeperId });
         }
