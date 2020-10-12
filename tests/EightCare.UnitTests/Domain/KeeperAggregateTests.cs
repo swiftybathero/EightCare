@@ -8,7 +8,7 @@ using System;
 using System.Linq;
 using Xunit;
 
-namespace EightCare.UnitTests
+namespace EightCare.UnitTests.Domain
 {
     public class KeeperAggregateTests
     {

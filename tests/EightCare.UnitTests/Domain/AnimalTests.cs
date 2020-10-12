@@ -3,7 +3,7 @@ using EightCare.Domain.KeeperAggregate;
 using FluentAssertions;
 using Xunit;
 
-namespace EightCare.UnitTests
+namespace EightCare.UnitTests.Domain
 {
     public class AnimalTests
     {
