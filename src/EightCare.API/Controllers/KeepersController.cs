@@ -1,9 +1,11 @@
 ﻿using EightCare.API.Commands;
 using EightCare.API.Constants;
 using EightCare.API.Models;
+using EightCare.API.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace EightCare.API.Controllers
@@ -20,7 +22,6 @@ namespace EightCare.API.Controllers
         }
 
         [HttpPost]
-        [ProducesDefaultResponseType]
         [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<IActionResult> RegisterKeeper([FromBody] RegisterKeeperModel registerKeeperModel)
         {
@@ -32,6 +33,16 @@ namespace EightCare.API.Controllers
             ));
 
             return Created(Routes.KeeperRoute + $"/{createdKeeperId}", new { id = createdKeeperId });
+        }
+
+        [HttpGet]
+        [Route("{keeperId}")]
+        [ProducesResponseType(typeof(KeeperModel), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetKeeperById([FromRoute] Guid keeperId)
+        {
+            var keeperModel = await _mediator.Send(new GetKeeperByIdQuery(keeperId));
+
+            return Ok(keeperModel);
         }
     }
 }
