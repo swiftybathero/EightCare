@@ -3,8 +3,10 @@ using AutoFixture.AutoNSubstitute;
 using EightCare.Domain.KeeperAggregate;
 using EightCare.Domain.KeeperAggregate.Abstractions;
 using EightCare.Infrastructure.Repositories;
+using EightCare.UnitTests.Extensions;
 using FluentAssertions;
 using NSubstitute;
+using System;
 using System.Linq;
 using Xunit;
 
@@ -29,18 +31,18 @@ namespace EightCare.UnitTests.Repositories
         public void GetById_ExistingElement_ShouldReturnKeeper()
         {
             // Arrange
-            var keepers = _fixture.CreateMany<Keeper>().ToList();
-            var expectedKeeper = keepers.First();
+            var returnedKeepersIds = _fixture.CreateMany<Guid>().ToArray();
+            var returnedKeepers = _fixture.CreateManyWithIds<Keeper>(returnedKeepersIds).ToList();
+            var expectedKeeper = returnedKeepers.First();
 
-            _keeperInMemoryContext.Keepers.Returns(keepers);
+            _keeperInMemoryContext.Keepers.Returns(returnedKeepers);
 
             // Act
             var foundKeeper = _inMemoryKeeperRepository.GetById(expectedKeeper.Id);
 
             // Assert
-            foundKeeper.Should().NotBeNull()
-                       .And
-                       .Should().BeEquivalentTo(expectedKeeper, options => options.ComparingByMembers<Keeper>());
+            foundKeeper.Should().NotBeNull();
+            foundKeeper.Should().BeEquivalentTo(expectedKeeper, options => options.ComparingByMembers<Keeper>());
         }
     }
 }
