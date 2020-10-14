@@ -8,11 +8,11 @@ namespace EightCare.Infrastructure.Repositories
 {
     public sealed class InMemoryKeeperRepository : IKeeperRepository
     {
-        private readonly KeeperInMemoryContext _context;
+        private readonly IKeeperInMemoryContext _context;
 
         public IUnitOfWork UnitOfWork => _context;
 
-        public InMemoryKeeperRepository(KeeperInMemoryContext context)
+        public InMemoryKeeperRepository(IKeeperInMemoryContext context)
         {
             _context = context;
         }

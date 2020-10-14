@@ -1,4 +1,3 @@
-using EightCare.Domain.Common;
 using EightCare.Domain.KeeperAggregate.Abstractions;
 using EightCare.Infrastructure.Repositories;
 using MediatR;
@@ -29,7 +28,7 @@ namespace EightCare.API
 
             services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
 
-            services.AddSingleton<KeeperInMemoryContext>();
+            services.AddSingleton<IKeeperInMemoryContext, KeeperInMemoryContext>();
             services.AddScoped<IKeeperRepository, InMemoryKeeperRepository>();
         }
 
