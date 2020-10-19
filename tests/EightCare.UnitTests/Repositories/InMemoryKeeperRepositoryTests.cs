@@ -47,7 +47,7 @@ namespace EightCare.UnitTests.Repositories
         }
 
         [Fact]
-        public void Add_ShouldInvokeContextAdd()
+        public void Add_ShouldAddKeeperToContext()
         {
             // Arrange
             var keeper = _fixture.Create<Keeper>();
