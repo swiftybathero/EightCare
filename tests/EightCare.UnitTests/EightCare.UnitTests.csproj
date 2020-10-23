@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoFixture" Version="4.14.0" />
+    <PackageReference Include="AutoFixture.AutoNSubstitute" Version="4.14.0" />
     <PackageReference Include="coverlet.collector" Version="1.3.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -23,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\EightCare.Domain\EightCare.Domain.csproj" />
+    <ProjectReference Include="..\..\src\EightCare.Infrastructure\EightCare.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

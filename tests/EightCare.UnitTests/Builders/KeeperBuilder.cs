@@ -1,5 +1,6 @@
 ﻿using AutoFixture;
 using EightCare.Domain.KeeperAggregate;
+using System;
 using System.Linq;
 
 namespace EightCare.UnitTests.Builders
@@ -33,10 +34,10 @@ namespace EightCare.UnitTests.Builders
             return _keeper ?? CreateDefaultKeeper();
         }
 
-        public KeeperBuilder WithAnimals(params int[] animalIds)
+        public KeeperBuilder WithAnimals(params Guid[] animalIds)
         {
             if (animalIds.Length == 0)
-                animalIds = _fixture.CreateMany<int>().ToArray();
+                animalIds = _fixture.CreateMany<Guid>().ToArray();
 
             foreach (var animalId in animalIds)
             {
