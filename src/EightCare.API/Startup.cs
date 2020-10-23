@@ -28,7 +28,7 @@ namespace EightCare.API
 
             services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
 
-            services.AddSingleton<IKeeperInMemoryContext, KeeperInMemoryContext>();
+            services.AddSingleton<IKeeperContext, InMemoryKeeperContext>();
             services.AddScoped<IKeeperRepository, InMemoryKeeperRepository>();
         }
 

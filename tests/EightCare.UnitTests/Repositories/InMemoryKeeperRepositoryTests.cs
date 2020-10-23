@@ -16,7 +16,7 @@ namespace EightCare.UnitTests.Repositories
     public class InMemoryKeeperRepositoryTests
     {
         private readonly IFixture _fixture;
-        private readonly IKeeperInMemoryContext _keeperInMemoryContext;
+        private readonly IKeeperContext _keeperContext;
         private readonly InMemoryKeeperRepository _inMemoryKeeperRepository;
 
         public InMemoryKeeperRepositoryTests()
@@ -24,7 +24,7 @@ namespace EightCare.UnitTests.Repositories
             _fixture = new Fixture();
             _fixture.Customize(new AutoNSubstituteCustomization());
 
-            _keeperInMemoryContext = _fixture.Freeze<IKeeperInMemoryContext>();
+            _keeperContext = _fixture.Freeze<IKeeperContext>();
             _inMemoryKeeperRepository = _fixture.Create<InMemoryKeeperRepository>();
         }
 
@@ -36,7 +36,7 @@ namespace EightCare.UnitTests.Repositories
             var returnedKeepers = _fixture.CreateManyWithIds<Keeper>(returnedKeepersIds).ToList();
             var expectedKeeper = returnedKeepers.First();
 
-            _keeperInMemoryContext.Keepers.Returns(returnedKeepers);
+            _keeperContext.Keepers.Returns(returnedKeepers);
 
             // Act
             var foundKeeper = _inMemoryKeeperRepository.GetById(expectedKeeper.Id);
@@ -52,13 +52,13 @@ namespace EightCare.UnitTests.Repositories
             // Arrange
             var keeper = _fixture.Create<Keeper>();
 
-            _keeperInMemoryContext.Keepers.Returns(new List<Keeper>());
+            _keeperContext.Keepers.Returns(new List<Keeper>());
 
             // Act
             _inMemoryKeeperRepository.Add(keeper);
 
             // Assert
-            _keeperInMemoryContext.Keepers
+            _keeperContext.Keepers
                                   .Should()
                                   .ContainEquivalentOf(keeper, options => options.ComparingByMembers<Keeper>());
         }
@@ -74,7 +74,7 @@ namespace EightCare.UnitTests.Repositories
             var keepers = _fixture.CreateManyWithIds<Keeper>(keeperIds).ToList();
             var newKeeperData = _fixture.CreateManyWithIds<Keeper>(existingKeeperId).First();
 
-            _keeperInMemoryContext.Keepers.Returns(keepers);
+            _keeperContext.Keepers.Returns(keepers);
 
             // Act
             _inMemoryKeeperRepository.Update(newKeeperData);
@@ -108,7 +108,7 @@ namespace EightCare.UnitTests.Repositories
             var keepers = _fixture.CreateManyWithIds<Keeper>(keeperIds).ToList();
             var keeperToDelete = _fixture.CreateManyWithIds<Keeper>(existingKeeperId).First();
 
-            _keeperInMemoryContext.Keepers.Returns(keepers);
+            _keeperContext.Keepers.Returns(keepers);
 
             // Act
             _inMemoryKeeperRepository.Delete(keeperToDelete);

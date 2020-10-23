@@ -6,11 +6,11 @@ using System.Linq;
 
 namespace EightCare.Infrastructure.Repositories
 {
-    public sealed class KeeperInMemoryContext : IKeeperInMemoryContext
+    public sealed class InMemoryKeeperContext : IKeeperContext
     {
         public List<Keeper> Keepers { get; }
 
-        public KeeperInMemoryContext()
+        public InMemoryKeeperContext()
         {
             Keepers = new List<Keeper>();
         }
