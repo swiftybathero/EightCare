@@ -41,7 +41,12 @@ namespace EightCare.UnitTests.Builders
 
             foreach (var animalId in animalIds)
             {
-                var createdAnimal = _keeper.AddNewAnimal(_fixture.Create<string>(), _fixture.Create<string>());
+                var scientificName = _fixture.Create<string>();
+                var commonName = _fixture.Create<string>();
+                var buyDate = _fixture.Create<DateTime>();
+                var buyAge = _fixture.Create<int>();
+
+                var createdAnimal = _keeper.AddNewAnimal(scientificName, commonName, buyDate, buyAge);
                 createdAnimal.SetId(animalId);
             }
 

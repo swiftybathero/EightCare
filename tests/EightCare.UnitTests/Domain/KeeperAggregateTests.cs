@@ -47,7 +47,13 @@ namespace EightCare.UnitTests.Domain
             var expectedAnimal = _fixture.Create<Animal>();
 
             // Act
-            var createdAnimal = keeper.AddNewAnimal(expectedAnimal.ScientificName, expectedAnimal.CommonName);
+            var createdAnimal = keeper.AddNewAnimal
+            (
+                expectedAnimal.ScientificName,
+                expectedAnimal.CommonName,
+                expectedAnimal.BuyDate,
+                expectedAnimal.BuyAge
+            );
 
             // Assert
             createdAnimal.Should().BeEquivalentTo(expectedAnimal, options => options.ComparingByMembers<Animal>());
@@ -63,7 +69,13 @@ namespace EightCare.UnitTests.Domain
             var keeper = _keeperBuilder.Create();
 
             // Act // Assert
-            keeper.Invoking(x => x.AddNewAnimal(scientificName, _fixture.Create<string>()))
+            keeper.Invoking(x => x.AddNewAnimal
+                  (
+                      scientificName,
+                      _fixture.Create<string>(),
+                      _fixture.Create<DateTime>(),
+                      _fixture.Create<int>()
+                  ))
                   .Should()
                   .Throw<KeeperDomainException>()
                   .WithMessage(ExceptionMessages.ScientificNameCannotBeEmpty);
