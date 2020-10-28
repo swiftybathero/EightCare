@@ -81,6 +81,27 @@ namespace EightCare.UnitTests.Domain
                   .WithMessage(ExceptionMessages.ScientificNameCannotBeEmpty);
         }
 
+        [Theory]
+        [InlineData(0)]
+        [InlineData(-1)]
+        public void AddNewAnimal_InvalidBuyAge_ShouldThrowDomainException(int buyAge)
+        {
+            // Arrange
+            var keeper = _keeperBuilder.Create();
+
+            // Act // Assert
+            keeper.Invoking(x => x.AddNewAnimal
+                  (
+                      _fixture.Create<string>(),
+                      _fixture.Create<string>(),
+                      _fixture.Create<DateTime>(),
+                      buyAge
+                  ))
+                  .Should()
+                  .Throw<KeeperDomainException>()
+                  .WithMessage(ExceptionMessages.BuyAgeCannotBeLowerThanOne);
+        }
+
         [Fact]
         public void FeedAnimal_AnimalExists_ShouldFeedAnimal()
         {
