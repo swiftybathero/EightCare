@@ -15,13 +15,16 @@ namespace EightCare.Domain.KeeperAggregate
         public string CommonName { get; private set; }
         public DateTime BuyDate { get; private set; }
         public int BuyAge { get; private set; }
+        public int Age => BuyAge + _molts.Count;
         public IReadOnlyCollection<Feeding> Feedings => _feedings.AsReadOnly();
         public IReadOnlyCollection<Molt> Molts => _molts.AsReadOnly();
 
-        public Animal(string scientificName, string commonName)
+        public Animal(string scientificName, string commonName, DateTime buyDate, int buyAge)
         {
             SetScientificName(scientificName);
             SetCommonName(commonName);
+            SetBuyDate(buyDate);
+            SetBuyAge(buyAge);
 
             _feedings = new List<Feeding>();
             _molts = new List<Molt>();
@@ -38,6 +41,19 @@ namespace EightCare.Domain.KeeperAggregate
         private void SetCommonName(string commonName)
         {
             CommonName = commonName;
+        }
+
+        private void SetBuyDate(DateTime buyDate)
+        {
+            BuyDate = buyDate;
+        }
+
+        private void SetBuyAge(int buyAge)
+        {
+            if (buyAge < 1)
+                throw new KeeperDomainException(ExceptionMessages.BuyAgeCannotBeLowerThanOne);
+
+            BuyAge = buyAge;
         }
 
         public void Feed(int amount = 1, DateTime? feedingDate = null)

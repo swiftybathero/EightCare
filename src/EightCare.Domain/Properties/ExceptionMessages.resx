@@ -120,6 +120,9 @@
   <data name="AnimalNotFound" xml:space="preserve">
     <value>Animal with {0} could not be found.</value>
   </data>
+  <data name="BuyAgeCannotBeLowerThanOne" xml:space="preserve">
+    <value>Animal Buy Age cannot be lower than 1.</value>
+  </data>
   <data name="FeedAmountCannotBeLowerThanOne" xml:space="preserve">
     <value>Amount of feed can't be lower than 1.</value>
   </data>
