@@ -44,6 +44,16 @@ namespace EightCare.Domain.KeeperAggregate
             animalToFeed.Feed(amount, feedingDate);
         }
 
+        public void ReportMolt(Guid animalId, DateTime? moltingDate = null)
+        {
+            var moltingAnimal = FindAnimalById(animalId);
+
+            if (moltingAnimal == null)
+                throw new KeeperDomainException(string.Format(ExceptionMessages.AnimalNotFound, animalId));
+
+            moltingAnimal.Molt(moltingDate);
+        }
+
         private Animal FindAnimalById(Guid animalId)
         {
             return _animals.FirstOrDefault(x => x.Id == animalId);
