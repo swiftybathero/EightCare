@@ -166,5 +166,36 @@ namespace EightCare.UnitTests.Domain
                   .Throw<KeeperDomainException>()
                   .WithMessage(ExceptionMessages.FeedAmountCannotBeLowerThanOne);
         }
+
+        [Fact]
+        public void ReportMolt_ShouldReportMolt()
+        {
+            // Arrange
+            var existingAnimalId = _fixture.Create<Guid>();
+            var keeper = _keeperBuilder.BuildDefault().WithAnimals(existingAnimalId).Create();
+
+            var moltingDate = _fixture.Create<DateTime>();
+            var moltingAnimal = keeper.Animals.First(x => x.Id == existingAnimalId);
+
+            // Act
+            keeper.ReportMolt(existingAnimalId, moltingDate);
+
+            // Assert
+            moltingAnimal.Molts.Should().Contain(x => x.Date == moltingDate);
+        }
+
+        [Fact]
+        public void ReportMolt_AnimalDoesNotExist_ShouldThrowException()
+        {
+            // Arrange
+            var keeper = _keeperBuilder.BuildDefault().WithAnimals().Create();
+            var notExistingAnimalId = _fixture.Create<Guid>();
+
+            // Act // Assert
+            keeper.Invoking(x => x.ReportMolt(notExistingAnimalId))
+                  .Should()
+                  .Throw<KeeperDomainException>()
+                  .WithMessage(string.Format(ExceptionMessages.AnimalNotFound, notExistingAnimalId));
+        }
     }
 }
