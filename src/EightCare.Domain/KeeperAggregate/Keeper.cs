@@ -25,9 +25,9 @@ namespace EightCare.Domain.KeeperAggregate
             _animals = new List<Animal>();
         }
 
-        public Animal AddNewAnimal(string scientificName, string commonName)
+        public Animal AddNewAnimal(string scientificName, string commonName, DateTime buyDate, int buyAge)
         {
-            var newAnimal = new Animal(scientificName, commonName);
+            var newAnimal = new Animal(scientificName, commonName, buyDate, buyAge);
 
             _animals.Add(newAnimal);
 
@@ -42,6 +42,16 @@ namespace EightCare.Domain.KeeperAggregate
                 throw new KeeperDomainException(string.Format(ExceptionMessages.AnimalNotFound, animalId));
 
             animalToFeed.Feed(amount, feedingDate);
+        }
+
+        public void ReportMolt(Guid animalId, DateTime? moltingDate = null)
+        {
+            var moltingAnimal = FindAnimalById(animalId);
+
+            if (moltingAnimal == null)
+                throw new KeeperDomainException(string.Format(ExceptionMessages.AnimalNotFound, animalId));
+
+            moltingAnimal.Molt(moltingDate);
         }
 
         private Animal FindAnimalById(Guid animalId)

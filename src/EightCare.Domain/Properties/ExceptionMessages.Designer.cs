@@ -70,6 +70,15 @@ namespace EightCare.Domain.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Animal Buy Age cannot be lower than 1..
+        /// </summary>
+        public static string BuyAgeCannotBeLowerThanOne {
+            get {
+                return ResourceManager.GetString("BuyAgeCannotBeLowerThanOne", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Amount of feed can&apos;t be lower than 1..
         /// </summary>
         public static string FeedAmountCannotBeLowerThanOne {
