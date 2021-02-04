@@ -185,6 +185,22 @@ namespace EightCare.UnitTests.Domain
         }
 
         [Fact]
+        public void ReportMolt_NoDate_ShouldReportDefaultDate()
+        {
+            // Arrange
+            var existingAnimalId = _fixture.Create<Guid>();
+            var keeper = _keeperBuilder.BuildDefault().WithAnimals(existingAnimalId).Create();
+
+            var moltingAnimal = keeper.Animals.First(x => x.Id == existingAnimalId);
+
+            // Act
+            keeper.ReportMolt(existingAnimalId);
+
+            // Assert
+            moltingAnimal.Molts.Should().NotContain(x => x.Date == default);
+        }
+
+        [Fact]
         public void ReportMolt_AnimalDoesNotExist_ShouldThrowException()
         {
             // Arrange
