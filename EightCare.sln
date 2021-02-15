@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EightCare.API", "EightCare.API\EightCare.API.csproj", "{A68B6B16-CE25-425C-A554-C4C6E22C258B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EightCare.API", "src\EightCare.API\EightCare.API.csproj", "{A68B6B16-CE25-425C-A554-C4C6E22C258B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EightCare.UnitTests", "..\tests\EightCare.UnitTests\EightCare.UnitTests.csproj", "{B6CBD1B5-6A2D-43DE-B8B4-C7DCF60F5768}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EightCare.UnitTests", "tests\EightCare.UnitTests\EightCare.UnitTests.csproj", "{B6CBD1B5-6A2D-43DE-B8B4-C7DCF60F5768}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EightCare.Domain", "EightCare.Domain\EightCare.Domain.csproj", "{49D4CA39-AA7F-4B4F-8AED-0A3DD158623E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EightCare.Domain", "src\EightCare.Domain\EightCare.Domain.csproj", "{49D4CA39-AA7F-4B4F-8AED-0A3DD158623E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "tests", "{CB2A165B-77DF-4FD5-8223-62D73E873A3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EightCare.Infrastructure", "src\EightCare.Infrastructure\EightCare.Infrastructure.csproj", "{FEB9B07C-098F-4D33-A928-B0269D569B49}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EightCare.Infrastructure", "EightCare.Infrastructure\EightCare.Infrastructure.csproj", "{FEB9B07C-098F-4D33-A928-B0269D569B49}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B81861C1-C9EB-4350-8D49-C68B75CB6D14}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{DBDFB2DF-3A7B-438A-99ED-7A16BAA9F75B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,7 +42,10 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{B6CBD1B5-6A2D-43DE-B8B4-C7DCF60F5768} = {CB2A165B-77DF-4FD5-8223-62D73E873A3E}
+		{A68B6B16-CE25-425C-A554-C4C6E22C258B} = {B81861C1-C9EB-4350-8D49-C68B75CB6D14}
+		{B6CBD1B5-6A2D-43DE-B8B4-C7DCF60F5768} = {DBDFB2DF-3A7B-438A-99ED-7A16BAA9F75B}
+		{49D4CA39-AA7F-4B4F-8AED-0A3DD158623E} = {B81861C1-C9EB-4350-8D49-C68B75CB6D14}
+		{FEB9B07C-098F-4D33-A928-B0269D569B49} = {B81861C1-C9EB-4350-8D49-C68B75CB6D14}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {213762BB-98D6-4CB7-90BF-B3D049E12497}
