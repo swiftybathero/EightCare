@@ -1,11 +1,11 @@
-using EightCare.Domain.Common;
-using EightCare.Domain.Exceptions;
-using EightCare.Domain.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using EightCare.Domain.Common;
+using EightCare.Domain.Exceptions;
+using EightCare.Domain.Properties;
 
-namespace EightCare.Domain.KeeperAggregate
+namespace EightCare.Domain.Entities
 {
     public sealed class Keeper : Entity, IAggregateRoot
     {

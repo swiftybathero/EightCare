@@ -2,9 +2,10 @@
 using System.Threading;
 using System.Threading.Tasks;
 using EightCare.Application.Common.Interfaces;
+using EightCare.Domain.Entities;
 using MediatR;
 
-namespace EightCare.Application.Keeper.Commands.RegisterKeeper
+namespace EightCare.Application.Keepers.Commands.RegisterKeeper
 {
     public class RegisterKeeperCommand : IRequest<Guid>
     {
@@ -31,7 +32,7 @@ namespace EightCare.Application.Keeper.Commands.RegisterKeeper
 
         public Task<Guid> Handle(RegisterKeeperCommand request, CancellationToken cancellationToken)
         {
-            var keeper = new Domain.KeeperAggregate.Keeper(request.Name, request.Email, request.Age);
+            var keeper = new Keeper(request.Name, request.Email, request.Age);
 
             _keeperRepository.Add(keeper);
             _keeperRepository.UnitOfWork.SaveChanges();

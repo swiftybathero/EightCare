@@ -1,7 +1,7 @@
 ﻿using AutoFixture;
-using EightCare.Domain.KeeperAggregate;
 using System;
 using System.Linq;
+using EightCare.Domain.Entities;
 
 namespace EightCare.UnitTests.Builders
 {

@@ -1,7 +1,7 @@
 ﻿using AutoFixture;
-using EightCare.Domain.KeeperAggregate;
 using FluentAssertions;
 using System.Linq;
+using EightCare.Domain.Entities;
 using EightCare.Infrastructure.Persistence;
 using Xunit;
 

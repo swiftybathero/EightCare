@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using EightCare.Application.Common.Interfaces;
-using EightCare.Domain.KeeperAggregate;
+using EightCare.Domain.Entities;
 
 namespace EightCare.Infrastructure.Persistence
 {

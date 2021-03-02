@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EightCare.Application.Keeper.Queries.GetKeeperById
+namespace EightCare.Application.Keepers.Queries.GetKeeperById
 {
     public class KeeperDto
     {

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using EightCare.Application.Common.Interfaces;
 using MediatR;
 
-namespace EightCare.Application.Keeper.Queries.GetKeeperById
+namespace EightCare.Application.Keepers.Queries.GetKeeperById
 {
     public class GetKeeperByIdQuery : IRequest<KeeperDto>
     {

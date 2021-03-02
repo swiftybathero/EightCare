@@ -1,6 +1,5 @@
 ﻿using AutoFixture;
 using AutoFixture.AutoNSubstitute;
-using EightCare.Domain.KeeperAggregate;
 using EightCare.UnitTests.Extensions;
 using FluentAssertions;
 using NSubstitute;
@@ -8,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using EightCare.Application.Common.Interfaces;
+using EightCare.Domain.Entities;
 using EightCare.Infrastructure.Persistence;
 using Xunit;
 

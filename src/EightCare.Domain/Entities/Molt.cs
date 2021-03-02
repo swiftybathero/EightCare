@@ -1,7 +1,7 @@
-﻿using EightCare.Domain.Common;
-using System;
+﻿using System;
+using EightCare.Domain.Common;
 
-namespace EightCare.Domain.KeeperAggregate
+namespace EightCare.Domain.Entities
 {
     public sealed class Molt : Entity
     {

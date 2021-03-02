@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using EightCare.Domain.Common;
+using EightCare.Domain.Entities;
 
 namespace EightCare.Application.Common.Interfaces
 {
     public interface IKeeperContext : IUnitOfWork
     {
-        List<Domain.KeeperAggregate.Keeper> Keepers { get; }
+        List<Keeper> Keepers { get; }
     }
 }

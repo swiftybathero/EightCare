@@ -1,13 +1,13 @@
 ﻿using System;
-using EightCare.Domain.Common;
+using EightCare.Domain.Entities;
 
 namespace EightCare.Application.Common.Interfaces
 {
-    public interface IKeeperRepository : IRepository<Domain.KeeperAggregate.Keeper>
+    public interface IKeeperRepository : IRepository<Keeper>
     {
-        Domain.KeeperAggregate.Keeper GetById(Guid keeperId);
-        void Add(Domain.KeeperAggregate.Keeper keeper);
-        void Update(Domain.KeeperAggregate.Keeper keeper);
-        void Delete(Domain.KeeperAggregate.Keeper keeper);
+        Keeper GetById(Guid keeperId);
+        void Add(Keeper keeper);
+        void Update(Keeper keeper);
+        void Delete(Keeper keeper);
     }
 }

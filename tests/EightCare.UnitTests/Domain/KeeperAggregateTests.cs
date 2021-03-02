@@ -1,11 +1,11 @@
 using AutoFixture;
 using EightCare.Domain.Exceptions;
-using EightCare.Domain.KeeperAggregate;
 using EightCare.Domain.Properties;
 using EightCare.UnitTests.Builders;
 using FluentAssertions;
 using System;
 using System.Linq;
+using EightCare.Domain.Entities;
 using Xunit;
 
 namespace EightCare.UnitTests.Domain

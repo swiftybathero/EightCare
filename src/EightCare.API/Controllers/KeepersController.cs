@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
-using EightCare.Application.Keeper.Commands.RegisterKeeper;
-using EightCare.Application.Keeper.Queries.GetKeeperById;
+using EightCare.Application.Keepers.Commands.RegisterKeeper;
+using EightCare.Application.Keepers.Queries.GetKeeperById;
 
 namespace EightCare.API.Controllers
 {

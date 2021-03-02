@@ -1,4 +1,4 @@
-﻿namespace EightCare.Domain.Common
+﻿namespace EightCare.Application.Common.Interfaces
 {
     public interface IUnitOfWork
     {
