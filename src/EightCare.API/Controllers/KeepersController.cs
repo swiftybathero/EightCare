@@ -1,12 +1,11 @@
-﻿using EightCare.API.Commands;
-using EightCare.API.Constants;
-using EightCare.API.Models;
-using EightCare.API.Queries;
+﻿using EightCare.API.Constants;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
+using EightCare.Application.Keeper.Commands.RegisterKeeper;
+using EightCare.Application.Keeper.Queries.GetKeeperById;
 
 namespace EightCare.API.Controllers
 {
@@ -23,21 +22,16 @@ namespace EightCare.API.Controllers
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public async Task<IActionResult> RegisterKeeper([FromBody] RegisterKeeperModel registerKeeperModel)
+        public async Task<IActionResult> RegisterKeeper([FromBody] RegisterKeeperCommand registerKeeperCommand)
         {
-            var createdKeeperId = await _mediator.Send(new RegisterKeeperCommand
-            (
-                registerKeeperModel.Name,
-                registerKeeperModel.Email,
-                registerKeeperModel.Age
-            ));
+            var createdKeeperId = await _mediator.Send(registerKeeperCommand);
 
             return Created(Routes.KeeperRoute + $"/{createdKeeperId}", new { id = createdKeeperId });
         }
 
         [HttpGet]
         [Route("{keeperId}")]
-        [ProducesResponseType(typeof(KeeperModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(KeeperDto), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetKeeperById([FromRoute] Guid keeperId)
         {
             var keeperModel = await _mediator.Send(new GetKeeperByIdQuery(keeperId));

@@ -1,13 +1,25 @@
-﻿using EightCare.API.Commands;
-using EightCare.Domain.KeeperAggregate;
-using EightCare.Domain.KeeperAggregate.Abstractions;
-using MediatR;
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using EightCare.Domain.KeeperAggregate.Abstractions;
+using MediatR;
 
-namespace EightCare.API.CommandHandlers
+namespace EightCare.Application.Keeper.Commands.RegisterKeeper
 {
+    public class RegisterKeeperCommand : IRequest<Guid>
+    {
+        public string Name { get; }
+        public string Email { get; }
+        public int Age { get; }
+
+        public RegisterKeeperCommand(string name, string email, int age)
+        {
+            Name = name;
+            Email = email;
+            Age = age;
+        }
+    }
+
     public class RegisterKeeperCommandHandler : IRequestHandler<RegisterKeeperCommand, Guid>
     {
         private readonly IKeeperRepository _keeperRepository;
@@ -19,7 +31,7 @@ namespace EightCare.API.CommandHandlers
 
         public Task<Guid> Handle(RegisterKeeperCommand request, CancellationToken cancellationToken)
         {
-            var keeper = new Keeper(request.Name, request.Email, request.Age);
+            var keeper = new Domain.KeeperAggregate.Keeper(request.Name, request.Email, request.Age);
 
             _keeperRepository.Add(keeper);
             _keeperRepository.UnitOfWork.SaveChanges();

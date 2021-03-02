@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B81861C1-C9E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{DBDFB2DF-3A7B-438A-99ED-7A16BAA9F75B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EightCare.Application", "src\EightCare.Application\EightCare.Application.csproj", "{FF104202-3747-44A3-A8D5-985406BC3E1E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{FEB9B07C-098F-4D33-A928-B0269D569B49}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEB9B07C-098F-4D33-A928-B0269D569B49}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEB9B07C-098F-4D33-A928-B0269D569B49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF104202-3747-44A3-A8D5-985406BC3E1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF104202-3747-44A3-A8D5-985406BC3E1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF104202-3747-44A3-A8D5-985406BC3E1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF104202-3747-44A3-A8D5-985406BC3E1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +52,7 @@ Global
 		{B6CBD1B5-6A2D-43DE-B8B4-C7DCF60F5768} = {DBDFB2DF-3A7B-438A-99ED-7A16BAA9F75B}
 		{49D4CA39-AA7F-4B4F-8AED-0A3DD158623E} = {B81861C1-C9EB-4350-8D49-C68B75CB6D14}
 		{FEB9B07C-098F-4D33-A928-B0269D569B49} = {B81861C1-C9EB-4350-8D49-C68B75CB6D14}
+		{FF104202-3747-44A3-A8D5-985406BC3E1E} = {B81861C1-C9EB-4350-8D49-C68B75CB6D14}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {213762BB-98D6-4CB7-90BF-B3D049E12497}
