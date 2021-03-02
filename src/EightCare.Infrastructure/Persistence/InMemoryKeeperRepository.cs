@@ -1,10 +1,10 @@
-﻿using EightCare.Domain.Common;
-using EightCare.Domain.KeeperAggregate;
-using EightCare.Domain.KeeperAggregate.Abstractions;
-using System;
+﻿using System;
 using System.Linq;
+using EightCare.Application.Common.Interfaces;
+using EightCare.Domain.Common;
+using EightCare.Domain.KeeperAggregate;
 
-namespace EightCare.Infrastructure.Repositories
+namespace EightCare.Infrastructure.Persistence
 {
     public sealed class InMemoryKeeperRepository : IKeeperRepository
     {

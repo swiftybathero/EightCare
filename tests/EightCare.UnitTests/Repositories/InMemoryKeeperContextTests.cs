@@ -1,8 +1,8 @@
 ﻿using AutoFixture;
 using EightCare.Domain.KeeperAggregate;
-using EightCare.Infrastructure.Repositories;
 using FluentAssertions;
 using System.Linq;
+using EightCare.Infrastructure.Persistence;
 using Xunit;
 
 namespace EightCare.UnitTests.Repositories

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using EightCare.Domain.KeeperAggregate.Abstractions;
+using EightCare.Application.Common.Interfaces;
 using MediatR;
 
 namespace EightCare.Application.Keeper.Queries.GetKeeperById

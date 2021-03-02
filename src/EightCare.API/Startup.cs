@@ -1,5 +1,3 @@
-using EightCare.Domain.KeeperAggregate.Abstractions;
-using EightCare.Infrastructure.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
+using EightCare.Application.Common.Interfaces;
+using EightCare.Infrastructure.Persistence;
 
 namespace EightCare.API
 {
