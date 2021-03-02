@@ -11,9 +11,9 @@ namespace EightCare.Domain.Entities
     {
         private readonly List<Animal> _animals;
 
-        public string Name { get; private set; }
-        public string Email { get; private set; }
-        public int Age { get; private set; }
+        public string Name { get; }
+        public string Email { get; }
+        public int Age { get; }
         public IReadOnlyCollection<Animal> Animals => _animals.AsReadOnly();
 
         public Keeper(string name, string email, int age)
@@ -39,7 +39,9 @@ namespace EightCare.Domain.Entities
             var animalToFeed = FindAnimalById(animalId);
 
             if (animalToFeed == null)
+            {
                 throw new KeeperDomainException(string.Format(ExceptionMessages.AnimalNotFound, animalId));
+            }
 
             animalToFeed.Feed(amount, feedingDate);
         }
@@ -49,7 +51,9 @@ namespace EightCare.Domain.Entities
             var moltingAnimal = FindAnimalById(animalId);
 
             if (moltingAnimal == null)
+            {
                 throw new KeeperDomainException(string.Format(ExceptionMessages.AnimalNotFound, animalId));
+            }
 
             moltingAnimal.Molt(moltingDate);
         }

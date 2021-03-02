@@ -37,8 +37,10 @@ namespace EightCare.UnitTests.Builders
         public KeeperBuilder WithAnimals(params Guid[] animalIds)
         {
             if (animalIds.Length == 0)
+            {
                 animalIds = _fixture.CreateMany<Guid>().ToArray();
-
+            }
+            
             foreach (var animalId in animalIds)
             {
                 var scientificName = _fixture.Create<string>();

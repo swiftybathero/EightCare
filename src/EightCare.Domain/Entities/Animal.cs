@@ -33,7 +33,9 @@ namespace EightCare.Domain.Entities
         private void SetScientificName(string scientificName)
         {
             if (string.IsNullOrEmpty(scientificName))
+            {
                 throw new KeeperDomainException(ExceptionMessages.ScientificNameCannotBeEmpty);
+            }
 
             ScientificName = scientificName;
         }
@@ -51,7 +53,9 @@ namespace EightCare.Domain.Entities
         private void SetBuyAge(int buyAge)
         {
             if (buyAge < 1)
+            {
                 throw new KeeperDomainException(ExceptionMessages.BuyAgeCannotBeLowerThanOne);
+            }
 
             BuyAge = buyAge;
         }
@@ -59,7 +63,9 @@ namespace EightCare.Domain.Entities
         public void Feed(int amount = 1, DateTime? feedingDate = null)
         {
             if (amount < 1)
+            {
                 throw new KeeperDomainException(ExceptionMessages.FeedAmountCannotBeLowerThanOne);
+            }
 
             _feedings.Add(new Feeding(feedingDate ?? DateTime.Now, amount));
         }

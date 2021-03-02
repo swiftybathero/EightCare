@@ -31,7 +31,9 @@ namespace EightCare.Infrastructure.Persistence
         public void Update(Keeper keeper)
         {
             if (keeper.Id == Guid.Empty)
+            {
                 throw new ArgumentException("Keeper without Id cannot be updated.");
+            }
 
             _context.Keepers.Remove(keeper);
             _context.Keepers.Add(keeper);
@@ -40,7 +42,9 @@ namespace EightCare.Infrastructure.Persistence
         public void Delete(Keeper keeper)
         {
             if (keeper.Id == Guid.Empty)
+            {
                 throw new ArgumentException("Keeper without Id cannot be removed.");
+            }
 
             _context.Keepers.Remove(keeper);
         }
