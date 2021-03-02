@@ -1,9 +1,9 @@
-﻿using AutoFixture;
-using EightCare.Domain.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using AutoFixture;
+using EightCare.Domain.Common;
 
-namespace EightCare.UnitTests.Extensions
+namespace EightCare.Infrastructure.UnitTests.Common.Extensions
 {
     public static class FixtureExtensions
     {

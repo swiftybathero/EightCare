@@ -1,11 +1,11 @@
-﻿using AutoFixture;
-using FluentAssertions;
-using System.Linq;
+﻿using System.Linq;
+using AutoFixture;
 using EightCare.Domain.Entities;
 using EightCare.Infrastructure.Persistence;
+using FluentAssertions;
 using Xunit;
 
-namespace EightCare.UnitTests.Repositories
+namespace EightCare.Infrastructure.UnitTests.Persistence
 {
     public class InMemoryKeeperContextTests
     {

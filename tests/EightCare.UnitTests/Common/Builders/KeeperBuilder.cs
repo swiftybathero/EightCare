@@ -1,9 +1,9 @@
-﻿using AutoFixture;
-using System;
+﻿using System;
 using System.Linq;
+using AutoFixture;
 using EightCare.Domain.Entities;
 
-namespace EightCare.UnitTests.Builders
+namespace EightCare.Domain.UnitTests.Common.Builders
 {
     public class KeeperBuilder
     {

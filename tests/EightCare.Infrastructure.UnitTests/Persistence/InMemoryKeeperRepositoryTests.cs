@@ -1,17 +1,17 @@
-﻿using AutoFixture;
-using AutoFixture.AutoNSubstitute;
-using EightCare.UnitTests.Extensions;
-using FluentAssertions;
-using NSubstitute;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoFixture;
+using AutoFixture.AutoNSubstitute;
 using EightCare.Application.Common.Interfaces;
 using EightCare.Domain.Entities;
 using EightCare.Infrastructure.Persistence;
+using EightCare.Infrastructure.UnitTests.Common.Extensions;
+using FluentAssertions;
+using NSubstitute;
 using Xunit;
 
-namespace EightCare.UnitTests.Repositories
+namespace EightCare.Infrastructure.UnitTests.Persistence
 {
     public class InMemoryKeeperRepositoryTests
     {
