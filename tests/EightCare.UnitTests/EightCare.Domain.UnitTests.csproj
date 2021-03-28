@@ -24,7 +24,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\EightCare.Domain\EightCare.Domain.csproj" />
-    <ProjectReference Include="..\..\src\EightCare.Infrastructure\EightCare.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
