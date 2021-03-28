@@ -43,8 +43,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"swiftybathero_EightCare" /o:"eightcare-app" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="coverage.xml"
-          dotnet build .\src
-          dotnet test .\src --collect:"XPlat Code Coverage" --results-directory:"TestResults" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
-          mv .\**\**\*.opencover.xml coverage.xml
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"swiftybathero_EightCare" /o:"eightcare-app" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml"
+          dotnet build
+          dotnet test --collect:"XPlat Code Coverage" --results-directory:"TestResults" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"

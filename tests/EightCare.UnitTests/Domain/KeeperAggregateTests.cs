@@ -1,14 +1,14 @@
-using AutoFixture;
-using EightCare.Domain.Exceptions;
-using EightCare.Domain.KeeperAggregate;
-using EightCare.Domain.Properties;
-using EightCare.UnitTests.Builders;
-using FluentAssertions;
 using System;
 using System.Linq;
+using AutoFixture;
+using EightCare.Domain.Entities;
+using EightCare.Domain.Exceptions;
+using EightCare.Domain.Properties;
+using EightCare.Domain.UnitTests.Common.Builders;
+using FluentAssertions;
 using Xunit;
 
-namespace EightCare.UnitTests.Domain
+namespace EightCare.Domain.UnitTests.Domain
 {
     public class KeeperAggregateTests
     {

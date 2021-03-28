@@ -5,7 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EightCare.Application\EightCare.Application.csproj" />
+    <PackageReference Include="MediatR" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EightCare.Domain\EightCare.Domain.csproj" />
   </ItemGroup>
 
 </Project>

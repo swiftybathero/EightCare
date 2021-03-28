@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EightCare.Application\EightCare.Application.csproj" />
     <ProjectReference Include="..\EightCare.Domain\EightCare.Domain.csproj" />
     <ProjectReference Include="..\EightCare.Infrastructure\EightCare.Infrastructure.csproj" />
   </ItemGroup>
