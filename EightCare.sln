@@ -19,7 +19,20 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EightCare.Application", "sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EightCare.Infrastructure.UnitTests", "tests\EightCare.Infrastructure.UnitTests\EightCare.Infrastructure.UnitTests.csproj", "{12A40ECA-D38F-4693-B278-84D340514C85}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EightCare.Application.UnitTests", "tests\EightCare.Application.UnitTests\EightCare.Application.UnitTests.csproj", "{8AE4B7C2-B301-4785-9EE9-4A2DAEA7A971}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EightCare.Application.UnitTests", "tests\EightCare.Application.UnitTests\EightCare.Application.UnitTests.csproj", "{8AE4B7C2-B301-4785-9EE9-4A2DAEA7A971}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{45E904A3-E35E-437D-93FD-ACF76D217BB5}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{F2893A06-7EE8-4660-A5A0-61387B78D1B7}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\dotnet-pr-build.yml = .github\workflows\dotnet-pr-build.yml
+		.github\workflows\dotnet-sonar-build.yml = .github\workflows\dotnet-sonar-build.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,6 +80,7 @@ Global
 		{FF104202-3747-44A3-A8D5-985406BC3E1E} = {B81861C1-C9EB-4350-8D49-C68B75CB6D14}
 		{12A40ECA-D38F-4693-B278-84D340514C85} = {DBDFB2DF-3A7B-438A-99ED-7A16BAA9F75B}
 		{8AE4B7C2-B301-4785-9EE9-4A2DAEA7A971} = {DBDFB2DF-3A7B-438A-99ED-7A16BAA9F75B}
+		{F2893A06-7EE8-4660-A5A0-61387B78D1B7} = {45E904A3-E35E-437D-93FD-ACF76D217BB5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {213762BB-98D6-4CB7-90BF-B3D049E12497}
