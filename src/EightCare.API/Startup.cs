@@ -9,6 +9,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using EightCare.Application.Common.Interfaces;
 using EightCare.Infrastructure.Persistence;
+using Microsoft.OpenApi.Models;
 
 namespace EightCare.API
 {
@@ -26,7 +27,14 @@ namespace EightCare.API
         {
             services.AddControllers();
 
-            services.AddSwaggerGen();
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "EightCare API",
+                    Version = "v1"
+                });
+            });
 
             services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
 
@@ -40,16 +48,16 @@ namespace EightCare.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                app.UseSwagger()
+                   .UseSwaggerUI(setup =>
+                   {
+                       setup.SwaggerEndpoint("/swagger/v1/swagger.json", "EightCare API V1");
+                       setup.RoutePrefix = string.Empty;
+                   });
             }
 
             app.UseHttpsRedirection();
-
-            app.UseSwagger()
-               .UseSwaggerUI(setup =>
-               {
-                   setup.SwaggerEndpoint("/swagger/v1/swagger.json", "EightCare API V1");
-                   setup.RoutePrefix = string.Empty;
-               });
 
             app.UseRouting();
 
