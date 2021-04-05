@@ -35,6 +35,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		.github\workflows\dotnet-sonar-build.yml = .github\workflows\dotnet-sonar-build.yml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EightCare.API.IntegrationTests", "tests\EightCare.API.IntegrationTests\EightCare.API.IntegrationTests.csproj", "{2F72C153-5606-4503-87EA-AEB8C393B41E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{8AE4B7C2-B301-4785-9EE9-4A2DAEA7A971}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8AE4B7C2-B301-4785-9EE9-4A2DAEA7A971}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8AE4B7C2-B301-4785-9EE9-4A2DAEA7A971}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F72C153-5606-4503-87EA-AEB8C393B41E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F72C153-5606-4503-87EA-AEB8C393B41E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F72C153-5606-4503-87EA-AEB8C393B41E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F72C153-5606-4503-87EA-AEB8C393B41E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,6 +88,7 @@ Global
 		{12A40ECA-D38F-4693-B278-84D340514C85} = {DBDFB2DF-3A7B-438A-99ED-7A16BAA9F75B}
 		{8AE4B7C2-B301-4785-9EE9-4A2DAEA7A971} = {DBDFB2DF-3A7B-438A-99ED-7A16BAA9F75B}
 		{F2893A06-7EE8-4660-A5A0-61387B78D1B7} = {45E904A3-E35E-437D-93FD-ACF76D217BB5}
+		{2F72C153-5606-4503-87EA-AEB8C393B41E} = {DBDFB2DF-3A7B-438A-99ED-7A16BAA9F75B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {213762BB-98D6-4CB7-90BF-B3D049E12497}
