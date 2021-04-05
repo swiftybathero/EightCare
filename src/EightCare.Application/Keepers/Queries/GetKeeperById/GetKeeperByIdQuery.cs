@@ -8,7 +8,7 @@ namespace EightCare.Application.Keepers.Queries.GetKeeperById
 {
     public class GetKeeperByIdQuery : IRequest<KeeperDto>
     {
-        public Guid KeeperId { get; }
+        public Guid KeeperId { get; init; }
 
         public GetKeeperByIdQuery(Guid keeperId)
         {

@@ -9,9 +9,9 @@ namespace EightCare.Application.Keepers.Commands.RegisterKeeper
 {
     public class RegisterKeeperCommand : IRequest<Guid>
     {
-        public string Name { get; }
-        public string Email { get; }
-        public int Age { get; }
+        public string Name { get; init; }
+        public string Email { get; init; }
+        public int Age { get; init; }
 
         public RegisterKeeperCommand(string name, string email, int age)
         {
