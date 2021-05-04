@@ -1,8 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using AutoFixture;
 using AutoFixture.AutoNSubstitute;
 using EightCare.API.Controllers;
 using EightCare.Application.Keepers.Commands.RegisterKeeper;
+using EightCare.Application.Keepers.Queries.GetKeeperById;
 using MediatR;
 using NSubstitute;
 using Xunit;
@@ -35,6 +37,19 @@ namespace EightCare.API.UnitTests.Controllers
 
             // Assert
             await _mediator.Received(1).Send(Arg.Is(registerKeeperCommand));
+        }
+
+        [Fact]
+        public async Task GetKeeperById_ShouldSendGetByIdQuery()
+        {
+            // Arrange
+            var keeperId = _fixture.Create<Guid>();
+
+            // Act
+            await _keepersController.GetKeeperById(keeperId);
+
+            // Assert
+            await _mediator.Received(1).Send(Arg.Is<GetKeeperByIdQuery>(x => x.KeeperId == keeperId));
         }
     }
 }
