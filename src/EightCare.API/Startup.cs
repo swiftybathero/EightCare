@@ -1,4 +1,3 @@
-using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -6,9 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
-using EightCare.Application.Common.Interfaces;
-using EightCare.Infrastructure.Persistence;
+using EightCare.Application;
+using EightCare.Infrastructure;
 using Microsoft.OpenApi.Models;
 
 namespace EightCare.API
@@ -36,10 +34,8 @@ namespace EightCare.API
                 });
             });
 
-            services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
-
-            services.AddSingleton<IKeeperContext, InMemoryKeeperContext>();
-            services.AddScoped<IKeeperRepository, InMemoryKeeperRepository>();
+            services.AddApplication();
+            services.AddInfrastructure();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

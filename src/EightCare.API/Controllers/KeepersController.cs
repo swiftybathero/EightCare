@@ -26,7 +26,7 @@ namespace EightCare.API.Controllers
         {
             var createdKeeperId = await _mediator.Send(registerKeeperCommand);
 
-            return Created(Routes.KeeperRoute + $"/{createdKeeperId}", new { id = createdKeeperId });
+            return Created(Routes.KeeperRoute + $"/{createdKeeperId}", new { Id = createdKeeperId });
         }
 
         [HttpGet]
