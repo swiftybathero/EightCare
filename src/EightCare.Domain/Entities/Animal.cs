@@ -11,6 +11,7 @@ namespace EightCare.Domain.Entities
         private readonly List<Feeding> _feedings;
         private readonly List<Molt> _molts;
 
+        // TODO: Refactor to Species ValueObject
         public string ScientificName { get; private set; }
         public string CommonName { get; private set; }
         public DateTime BuyDate { get; private set; }
