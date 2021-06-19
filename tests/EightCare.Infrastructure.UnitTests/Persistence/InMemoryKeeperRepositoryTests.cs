@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoFixture;
 using AutoFixture.AutoNSubstitute;
-using EightCare.Application.Common.Interfaces;
 using EightCare.Domain.Entities;
 using EightCare.Infrastructure.Persistence;
 using EightCare.Infrastructure.UnitTests.Common.Extensions;
@@ -16,7 +15,7 @@ namespace EightCare.Infrastructure.UnitTests.Persistence
     public class InMemoryKeeperRepositoryTests
     {
         private readonly IFixture _fixture;
-        private readonly IKeeperContext _keeperContext;
+        private readonly InMemoryKeeperContext _keeperContext;
         private readonly InMemoryKeeperRepository _inMemoryKeeperRepository;
 
         public InMemoryKeeperRepositoryTests()
@@ -24,7 +23,7 @@ namespace EightCare.Infrastructure.UnitTests.Persistence
             _fixture = new Fixture();
             _fixture.Customize(new AutoNSubstituteCustomization());
 
-            _keeperContext = _fixture.Freeze<IKeeperContext>();
+            _keeperContext = _fixture.Freeze<InMemoryKeeperContext>();
             _inMemoryKeeperRepository = _fixture.Create<InMemoryKeeperRepository>();
         }
 
