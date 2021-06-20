@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using EightCare.Infrastructure.Persistence;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace EightCare.Infrastructure
 {
@@ -6,7 +7,7 @@ namespace EightCare.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
-            return services;
+            return services.AddDbContext<KeeperContext>();
         }
     }
 }

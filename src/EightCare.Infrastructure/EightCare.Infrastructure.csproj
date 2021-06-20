@@ -15,8 +15,4 @@
     <ProjectReference Include="..\EightCare.Application\EightCare.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Persistence\" />
-  </ItemGroup>
-
 </Project>
