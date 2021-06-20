@@ -1,7 +1,9 @@
-﻿namespace EightCare.Application.Common.Interfaces
+﻿using System.Threading.Tasks;
+
+namespace EightCare.Application.Common.Interfaces
 {
     public interface IUnitOfWork
     {
-        void SaveChanges();
+        Task SaveChangesAsync();
     }
 }

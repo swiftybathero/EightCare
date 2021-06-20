@@ -25,17 +25,17 @@ namespace EightCare.Application.Keepers.Queries.GetKeeperById
             _keeperRepository = keeperRepository;
         }
 
-        public Task<KeeperDto> Handle(GetKeeperByIdQuery request, CancellationToken cancellationToken)
+        public async Task<KeeperDto> Handle(GetKeeperByIdQuery request, CancellationToken cancellationToken)
         {
-            var keeper = _keeperRepository.GetById(request.KeeperId);
+            var keeper = await _keeperRepository.GetByIdAsync(request.KeeperId);
 
-            return Task.FromResult(new KeeperDto
+            return new KeeperDto
             {
                 Id = keeper.Id,
                 Name = keeper.Name,
                 Email = keeper.Email,
                 Age = keeper.Age
-            });
+            };
         }
     }
 }

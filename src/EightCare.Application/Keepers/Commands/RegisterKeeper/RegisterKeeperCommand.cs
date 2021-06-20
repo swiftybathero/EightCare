@@ -30,14 +30,14 @@ namespace EightCare.Application.Keepers.Commands.RegisterKeeper
             _keeperRepository = keeperRepository;
         }
 
-        public Task<Guid> Handle(RegisterKeeperCommand request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(RegisterKeeperCommand request, CancellationToken cancellationToken)
         {
             var keeper = new Keeper(request.Name, request.Email, request.Age);
 
-            _keeperRepository.Add(keeper);
-            _keeperRepository.UnitOfWork.SaveChanges();
+            await _keeperRepository.AddAsync(keeper);
+            await _keeperRepository.UnitOfWork.SaveChangesAsync();
 
-            return Task.FromResult(keeper.Id);
+            return keeper.Id;
         }
     }
 }

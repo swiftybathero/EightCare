@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Threading.Tasks;
 using EightCare.Domain.Entities;
 
 namespace EightCare.Application.Common.Interfaces
 {
     public interface IKeeperRepository : IRepository<Keeper>
     {
-        Keeper GetById(Guid keeperId);
-        void Add(Keeper keeper);
-        void Update(Keeper keeper);
-        void Delete(Keeper keeper);
+        Task<Keeper> GetByIdAsync(Guid keeperId);
+        Task AddAsync(Keeper keeper);
+        Task UpdateAsync(Keeper keeper);
+        Task DeleteAsync(Keeper keeper);
     }
 }
