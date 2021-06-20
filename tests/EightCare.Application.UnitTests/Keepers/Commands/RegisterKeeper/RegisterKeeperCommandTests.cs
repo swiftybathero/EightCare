@@ -36,7 +36,7 @@ namespace EightCare.Application.UnitTests.Keepers.Commands.RegisterKeeper
             await _handler.Handle(command, CancellationToken.None);
 
             // Assert
-            _keeperRepository.Received(1).Add(Arg.Any<Keeper>());
+            await _keeperRepository.Received(1).AddAsync(Arg.Any<Keeper>());
         }
     }
 }

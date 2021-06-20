@@ -32,7 +32,7 @@ namespace EightCare.Application.UnitTests.Keepers.Queries.GetKeeperById
         {
             // Arrange
             var keeper = _fixture.Create<Keeper>();
-            _keeperRepository.GetById(Arg.Is(keeper.Id)).Returns(keeper);
+            _keeperRepository.GetByIdAsync(Arg.Is(keeper.Id)).Returns(keeper);
 
             var query = new GetKeeperByIdQuery(keeper.Id);
 
