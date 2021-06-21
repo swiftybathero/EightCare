@@ -15,6 +15,8 @@ namespace EightCare.Infrastructure.Persistence.EntityConfigurations
 
             keeperBuilder.HasMany(k => k.Animals)
                          .WithOne();
+
+            keeperBuilder.ToTable(nameof(Keeper));
         }
     }
 }
