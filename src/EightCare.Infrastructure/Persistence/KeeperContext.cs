@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.Reflection;
+using System.Threading.Tasks;
 using EightCare.Application.Common.Interfaces;
 using EightCare.Domain.Entities;
-using EightCare.Infrastructure.EntityConfigurations;
 using Microsoft.EntityFrameworkCore;
 
 namespace EightCare.Infrastructure.Persistence
@@ -12,8 +12,7 @@ namespace EightCare.Infrastructure.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new KeeperEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new AnimalEntityTypeConfiguration());
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
 
         public async Task SaveChangesAsync()

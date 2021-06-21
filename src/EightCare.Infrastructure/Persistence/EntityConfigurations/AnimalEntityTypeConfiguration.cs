@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace EightCare.Infrastructure.EntityConfigurations
+namespace EightCare.Infrastructure.Persistence.EntityConfigurations
 {
     public class AnimalEntityTypeConfiguration : IEntityTypeConfiguration<Animal>
     {
