@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using System.Diagnostics.CodeAnalysis;
 using EightCare.Application;
 using EightCare.Infrastructure;
+using EightCare.Infrastructure.Persistence;
 using Microsoft.OpenApi.Models;
 
 namespace EightCare.API
@@ -39,7 +40,7 @@ namespace EightCare.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, KeeperContext context)
         {
             if (env.IsDevelopment())
             {
@@ -51,6 +52,8 @@ namespace EightCare.API
                        setup.SwaggerEndpoint("/swagger/v1/swagger.json", "EightCare API V1");
                        setup.RoutePrefix = string.Empty;
                    });
+
+                context.Database.EnsureCreated();
             }
 
             app.UseHttpsRedirection();
