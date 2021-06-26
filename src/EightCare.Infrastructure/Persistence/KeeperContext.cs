@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Threading.Tasks;
 using EightCare.Application.Common.Interfaces;
 using EightCare.Domain.Entities;
@@ -31,7 +32,9 @@ namespace EightCare.Infrastructure.Persistence
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(_configuration.ConnectionString);
+            optionsBuilder.UseSqlServer(_configuration.ConnectionString)
+                          .EnableSensitiveDataLogging() // TODO: Temporary logging
+                          .LogTo(Console.WriteLine);
         }
     }
 }
