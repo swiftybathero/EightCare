@@ -8,6 +8,7 @@ using EightCare.Application.Keepers.Commands.RegisterKeeper;
 using EightCare.Application.Keepers.Queries.GetKeeperById;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Respawn;
 using Xunit;
 
 namespace EightCare.API.IntegrationTests.Controllers
@@ -16,6 +17,8 @@ namespace EightCare.API.IntegrationTests.Controllers
     {
         private readonly HttpClient _client;
         private readonly IFixture _fixture;
+
+        private static Checkpoint _checkpoint = new();
 
         public KeepersControllerTests(WebApplicationFactory<Startup> factory)
         {
@@ -36,6 +39,8 @@ namespace EightCare.API.IntegrationTests.Controllers
             createdId.Should().NotBeNullOrEmpty();
             response.Headers.Location.Should().NotBeNull();
             response.Headers.Location?.OriginalString.Should().Be($"{Routes.KeeperRoute}/{createdId}");
+
+           await _checkpoint.Reset("Data Source=(localdb)\\mssqllocaldb;Initial Catalog=KeepersDb;Integrated Security=True");
         }
 
         [Fact]
