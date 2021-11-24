@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using AutoFixture;
@@ -17,7 +16,7 @@ using Xunit;
 
 namespace EightCare.API.IntegrationTests.Controllers
 {
-    public class KeepersControllerTests : IClassFixture<WebApplicationFactory<Startup>>, IDisposable
+    public class KeepersControllerTests : IClassFixture<WebApplicationFactory<Startup>>, IAsyncLifetime
     {
         private readonly HttpClient _client;
         private readonly IFixture _fixture;
@@ -27,17 +26,15 @@ namespace EightCare.API.IntegrationTests.Controllers
 
         public KeepersControllerTests(WebApplicationFactory<Startup> factory)
         {
-            _client = factory.WithWebHostBuilder
-             (
-                 builder => builder.ConfigureServices
-                 (
-                     services =>
-                     {
-                         _checkpointConnectionString = services.BuildServiceProvider()
-                                                               .GetService<IOptions<DatabaseConfiguration>>()
-                                                               ?.Value.ConnectionString;
-                     })
-             )
+            _client = factory.WithWebHostBuilder(builder =>
+             {
+                 builder.ConfigureServices(services =>
+                 {
+                     _checkpointConnectionString = services.BuildServiceProvider()
+                                                           .GetService<IOptions<DatabaseConfiguration>>()?.Value
+                                                           .ConnectionString;
+                 });
+             })
              .CreateClient();
 
             _fixture = new Fixture();
@@ -83,9 +80,14 @@ namespace EightCare.API.IntegrationTests.Controllers
             return response;
         }
 
-        public void Dispose()
+        public async Task InitializeAsync()
         {
-            Checkpoint.Reset(_checkpointConnectionString);
+            await Checkpoint.Reset(_checkpointConnectionString);
+        }
+
+        public Task DisposeAsync()
+        {
+            return Task.CompletedTask;
         }
     }
 }
