@@ -1,4 +1,5 @@
-﻿using EightCare.Domain.Entities;
+﻿using System;
+using EightCare.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -15,6 +16,9 @@ namespace EightCare.Infrastructure.Persistence.EntityConfigurations
 
             keeperBuilder.HasMany(k => k.Animals)
                          .WithOne();
+
+            keeperBuilder.Property<DateTime>("Created")
+                         .HasDefaultValueSql("GETDATE()");
 
             keeperBuilder.ToTable(nameof(Keeper));
         }
