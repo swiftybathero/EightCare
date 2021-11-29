@@ -3,6 +3,6 @@
     public static class Routes
     {
         public const string ApiRoute = "/api";
-        public const string KeeperRoute = ApiRoute + "/keepers";
+        public const string CollectionRoute = ApiRoute + "/collections";
     }
 }

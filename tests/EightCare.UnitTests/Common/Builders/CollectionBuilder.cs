@@ -5,36 +5,36 @@ using EightCare.Domain.Entities;
 
 namespace EightCare.Domain.UnitTests.Common.Builders
 {
-    public class KeeperBuilder
+    public class CollectionBuilder
     {
         private readonly IFixture _fixture;
-        private Keeper _keeper;
+        private Collection _collection;
 
-        public KeeperBuilder()
+        public CollectionBuilder()
         {
             _fixture = new Fixture();
         }
 
-        public KeeperBuilder Build(string name, string email, int age)
+        public CollectionBuilder Build(string name, string email, int age)
         {
-            _keeper = new Keeper(name, email, age);
+            _collection = new Collection(name, email, age);
 
             return this;
         }
 
-        public KeeperBuilder BuildDefault()
+        public CollectionBuilder BuildDefault()
         {
-            _keeper = CreateDefaultKeeper();
+            _collection = CreateDefaultCollection();
 
             return this;
         }
 
-        public Keeper Create()
+        public Collection Create()
         {
-            return _keeper ?? CreateDefaultKeeper();
+            return _collection ?? CreateDefaultCollection();
         }
 
-        public KeeperBuilder WithAnimals(params Guid[] animalIds)
+        public CollectionBuilder WithAnimals(params Guid[] animalIds)
         {
             if (animalIds.Length == 0)
             {
@@ -48,16 +48,16 @@ namespace EightCare.Domain.UnitTests.Common.Builders
                 var buyDate = _fixture.Create<DateTime>();
                 var buyAge = _fixture.Create<int>();
 
-                var createdAnimal = _keeper.AddNewAnimal(scientificName, commonName, buyDate, buyAge);
+                var createdAnimal = _collection.AddNewAnimal(scientificName, commonName, buyDate, buyAge);
                 createdAnimal.SetId(animalId);
             }
 
             return this;
         }
 
-        private Keeper CreateDefaultKeeper()
+        private Collection CreateDefaultCollection()
         {
-            return _fixture.Create<Keeper>();
+            return _fixture.Create<Collection>();
         }
     }
 }

@@ -35,7 +35,7 @@ namespace EightCare.Domain.Entities
         {
             if (string.IsNullOrEmpty(scientificName))
             {
-                throw new KeeperDomainException(ExceptionMessages.ScientificNameCannotBeEmpty);
+                throw new CollectionDomainException(ExceptionMessages.ScientificNameCannotBeEmpty);
             }
 
             ScientificName = scientificName;
@@ -55,7 +55,7 @@ namespace EightCare.Domain.Entities
         {
             if (buyAge < 1)
             {
-                throw new KeeperDomainException(ExceptionMessages.BuyAgeCannotBeLowerThanOne);
+                throw new CollectionDomainException(ExceptionMessages.BuyAgeCannotBeLowerThanOne);
             }
 
             BuyAge = buyAge;
@@ -65,7 +65,7 @@ namespace EightCare.Domain.Entities
         {
             if (amount < 1)
             {
-                throw new KeeperDomainException(ExceptionMessages.FeedAmountCannotBeLowerThanOne);
+                throw new CollectionDomainException(ExceptionMessages.FeedAmountCannotBeLowerThanOne);
             }
 
             _feedings.Add(new Feeding(feedingDate ?? DateTime.Now, amount));

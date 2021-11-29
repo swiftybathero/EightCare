@@ -10,19 +10,19 @@ using Xunit;
 
 namespace EightCare.Domain.UnitTests.Domain
 {
-    public class KeeperAggregateTests
+    public class CollectionAggregateTests
     {
         private readonly IFixture _fixture;
-        private readonly KeeperBuilder _keeperBuilder;
+        private readonly CollectionBuilder _collectionBuilder;
 
-        public KeeperAggregateTests()
+        public CollectionAggregateTests()
         {
             _fixture = new Fixture();
-            _keeperBuilder = new KeeperBuilder();
+            _collectionBuilder = new CollectionBuilder();
         }
 
         [Fact]
-        public void New_ShouldCreateKeeper()
+        public void New_ShouldCreateCollection()
         {
             // Arrange
             var name = _fixture.Create<string>();
@@ -30,24 +30,24 @@ namespace EightCare.Domain.UnitTests.Domain
             var age = _fixture.Create<int>();
 
             // Act
-            var keeper = new Keeper(name, email, age);
+            var collection = new Collection(name, email, age);
 
             // Assert
-            keeper.Should().NotBeNull();
-            keeper.Name.Should().Be(name);
-            keeper.Email.Should().Be(email);
-            keeper.Age.Should().Be(age);
+            collection.Should().NotBeNull();
+            collection.Name.Should().Be(name);
+            collection.Email.Should().Be(email);
+            collection.Age.Should().Be(age);
         }
 
         [Fact]
         public void AddNewAnimal_ShouldAddAnimal()
         {
             // Arrange
-            var keeper = _keeperBuilder.Create();
+            var collection = _collectionBuilder.Create();
             var expectedAnimal = _fixture.Create<Animal>();
 
             // Act
-            var createdAnimal = keeper.AddNewAnimal
+            var createdAnimal = collection.AddNewAnimal
             (
                 expectedAnimal.ScientificName,
                 expectedAnimal.CommonName,
@@ -57,7 +57,7 @@ namespace EightCare.Domain.UnitTests.Domain
 
             // Assert
             createdAnimal.Should().BeEquivalentTo(expectedAnimal, options => options.ComparingByMembers<Animal>());
-            keeper.Animals.Should().Contain(createdAnimal);
+            collection.Animals.Should().Contain(createdAnimal);
         }
 
         [Theory]
@@ -66,10 +66,10 @@ namespace EightCare.Domain.UnitTests.Domain
         public void AddNewAnimal_NoScientificName_ShouldThrowDomainException(string scientificName)
         {
             // Arrange
-            var keeper = _keeperBuilder.Create();
+            var collection = _collectionBuilder.Create();
 
             // Act // Assert
-            keeper.Invoking(x => x.AddNewAnimal
+            collection.Invoking(x => x.AddNewAnimal
                   (
                       scientificName,
                       _fixture.Create<string>(),
@@ -77,7 +77,7 @@ namespace EightCare.Domain.UnitTests.Domain
                       _fixture.Create<int>()
                   ))
                   .Should()
-                  .Throw<KeeperDomainException>()
+                  .Throw<CollectionDomainException>()
                   .WithMessage(ExceptionMessages.ScientificNameCannotBeEmpty);
         }
 
@@ -87,10 +87,10 @@ namespace EightCare.Domain.UnitTests.Domain
         public void AddNewAnimal_InvalidBuyAge_ShouldThrowDomainException(int buyAge)
         {
             // Arrange
-            var keeper = _keeperBuilder.Create();
+            var collection = _collectionBuilder.Create();
 
             // Act // Assert
-            keeper.Invoking(x => x.AddNewAnimal
+            collection.Invoking(x => x.AddNewAnimal
                   (
                       _fixture.Create<string>(),
                       _fixture.Create<string>(),
@@ -98,7 +98,7 @@ namespace EightCare.Domain.UnitTests.Domain
                       buyAge
                   ))
                   .Should()
-                  .Throw<KeeperDomainException>()
+                  .Throw<CollectionDomainException>()
                   .WithMessage(ExceptionMessages.BuyAgeCannotBeLowerThanOne);
         }
 
@@ -110,11 +110,11 @@ namespace EightCare.Domain.UnitTests.Domain
 
             var existingAnimalId = _fixture.Create<Guid>();
             var feedingDate = _fixture.Create<DateTime>();
-            var keeper = _keeperBuilder.BuildDefault().WithAnimals(existingAnimalId).Create();
-            var animal = keeper.Animals.First(x => x.Id == existingAnimalId);
+            var collection = _collectionBuilder.BuildDefault().WithAnimals(existingAnimalId).Create();
+            var animal = collection.Animals.First(x => x.Id == existingAnimalId);
 
             // Act
-            keeper.FeedAnimal(existingAnimalId, FeedAmount, feedingDate);
+            collection.FeedAnimal(existingAnimalId, FeedAmount, feedingDate);
 
             // Assert
             animal.Feedings.Should().ContainSingle(x => x.Date == feedingDate && x.Amount == FeedAmount);
@@ -127,11 +127,11 @@ namespace EightCare.Domain.UnitTests.Domain
             const int ExpectedDefaultAmount = 1;
 
             var existingAnimalId = _fixture.Create<Guid>();
-            var keeper = _keeperBuilder.BuildDefault().WithAnimals(existingAnimalId).Create();
-            var animal = keeper.Animals.First(x => x.Id == existingAnimalId);
+            var collection = _collectionBuilder.BuildDefault().WithAnimals(existingAnimalId).Create();
+            var animal = collection.Animals.First(x => x.Id == existingAnimalId);
 
             // Act
-            keeper.FeedAnimal(existingAnimalId);
+            collection.FeedAnimal(existingAnimalId);
 
             // Assert
             animal.Feedings.Should().ContainSingle(x => x.Date != default && x.Amount == ExpectedDefaultAmount);
@@ -141,13 +141,13 @@ namespace EightCare.Domain.UnitTests.Domain
         public void FeedAnimal_AnimalDoesNotExist_ShouldThrowException()
         {
             // Arrange
-            var keeper = _keeperBuilder.BuildDefault().WithAnimals().Create();
+            var collection = _collectionBuilder.BuildDefault().WithAnimals().Create();
             var notExistingAnimalId = _fixture.Create<Guid>();
 
             // Act // Assert
-            keeper.Invoking(x => x.FeedAnimal(notExistingAnimalId))
+            collection.Invoking(x => x.FeedAnimal(notExistingAnimalId))
                   .Should()
-                  .Throw<KeeperDomainException>()
+                  .Throw<CollectionDomainException>()
                   .WithMessage(string.Format(ExceptionMessages.AnimalNotFound, notExistingAnimalId));
         }
 
@@ -158,12 +158,12 @@ namespace EightCare.Domain.UnitTests.Domain
         {
             // Arrange
             var existingAnimalId = _fixture.Create<Guid>();
-            var keeper = _keeperBuilder.BuildDefault().WithAnimals(existingAnimalId).Create();
+            var collection = _collectionBuilder.BuildDefault().WithAnimals(existingAnimalId).Create();
 
             // Act // Assert
-            keeper.Invoking(x => x.FeedAnimal(existingAnimalId, amount))
+            collection.Invoking(x => x.FeedAnimal(existingAnimalId, amount))
                   .Should()
-                  .Throw<KeeperDomainException>()
+                  .Throw<CollectionDomainException>()
                   .WithMessage(ExceptionMessages.FeedAmountCannotBeLowerThanOne);
         }
 
@@ -172,13 +172,13 @@ namespace EightCare.Domain.UnitTests.Domain
         {
             // Arrange
             var existingAnimalId = _fixture.Create<Guid>();
-            var keeper = _keeperBuilder.BuildDefault().WithAnimals(existingAnimalId).Create();
+            var collection = _collectionBuilder.BuildDefault().WithAnimals(existingAnimalId).Create();
 
             var moltingDate = _fixture.Create<DateTime>();
-            var moltingAnimal = keeper.Animals.First(x => x.Id == existingAnimalId);
+            var moltingAnimal = collection.Animals.First(x => x.Id == existingAnimalId);
 
             // Act
-            keeper.ReportMolt(existingAnimalId, moltingDate);
+            collection.ReportMolt(existingAnimalId, moltingDate);
 
             // Assert
             moltingAnimal.Molts.Should().Contain(x => x.Date == moltingDate);
@@ -189,12 +189,12 @@ namespace EightCare.Domain.UnitTests.Domain
         {
             // Arrange
             var existingAnimalId = _fixture.Create<Guid>();
-            var keeper = _keeperBuilder.BuildDefault().WithAnimals(existingAnimalId).Create();
+            var collection = _collectionBuilder.BuildDefault().WithAnimals(existingAnimalId).Create();
 
-            var moltingAnimal = keeper.Animals.First(x => x.Id == existingAnimalId);
+            var moltingAnimal = collection.Animals.First(x => x.Id == existingAnimalId);
 
             // Act
-            keeper.ReportMolt(existingAnimalId);
+            collection.ReportMolt(existingAnimalId);
 
             // Assert
             moltingAnimal.Molts.Should().NotContain(x => x.Date == default);
@@ -204,13 +204,13 @@ namespace EightCare.Domain.UnitTests.Domain
         public void ReportMolt_AnimalDoesNotExist_ShouldThrowException()
         {
             // Arrange
-            var keeper = _keeperBuilder.BuildDefault().WithAnimals().Create();
+            var collection = _collectionBuilder.BuildDefault().WithAnimals().Create();
             var notExistingAnimalId = _fixture.Create<Guid>();
 
             // Act // Assert
-            keeper.Invoking(x => x.ReportMolt(notExistingAnimalId))
+            collection.Invoking(x => x.ReportMolt(notExistingAnimalId))
                   .Should()
-                  .Throw<KeeperDomainException>()
+                  .Throw<CollectionDomainException>()
                   .WithMessage(string.Format(ExceptionMessages.AnimalNotFound, notExistingAnimalId));
         }
     }

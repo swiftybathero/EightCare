@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace EightCare.Application.Keepers.Queries.GetKeeperById
+namespace EightCare.Application.Collections.Queries.GetCollectionById
 {
-    public class KeeperDto
+    public class CollectionDto
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

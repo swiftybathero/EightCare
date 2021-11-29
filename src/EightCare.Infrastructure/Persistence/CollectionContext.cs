@@ -9,13 +9,13 @@ using Microsoft.Extensions.Options;
 
 namespace EightCare.Infrastructure.Persistence
 {
-    public class KeeperContext : DbContext, IUnitOfWork
+    public class CollectionContext : DbContext, IUnitOfWork
     {
         private readonly DatabaseConfiguration _configuration;
 
-        public DbSet<Keeper> Keepers { get; set; }
+        public DbSet<Collection> Collections { get; set; }
 
-        public KeeperContext(IOptions<DatabaseConfiguration> configuration)
+        public CollectionContext(IOptions<DatabaseConfiguration> configuration)
         {
             _configuration = configuration.Value;
         }

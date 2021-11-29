@@ -7,7 +7,7 @@ using EightCare.Domain.Properties;
 
 namespace EightCare.Domain.Entities
 {
-    public sealed class Keeper : Entity, IAggregateRoot
+    public sealed class Collection : Entity, IAggregateRoot
     {
         private readonly List<Animal> _animals;
 
@@ -16,7 +16,7 @@ namespace EightCare.Domain.Entities
         public int Age { get; private set; }
         public IReadOnlyCollection<Animal> Animals => _animals.AsReadOnly();
 
-        public Keeper(string name, string email, int age)
+        public Collection(string name, string email, int age)
         {
             Name = name;
             Email = email;
@@ -40,7 +40,7 @@ namespace EightCare.Domain.Entities
 
             if (animalToFeed == null)
             {
-                throw new KeeperDomainException(string.Format(ExceptionMessages.AnimalNotFound, animalId));
+                throw new CollectionDomainException(string.Format(ExceptionMessages.AnimalNotFound, animalId));
             }
 
             animalToFeed.Feed(amount, feedingDate);
@@ -52,7 +52,7 @@ namespace EightCare.Domain.Entities
 
             if (moltingAnimal == null)
             {
-                throw new KeeperDomainException(string.Format(ExceptionMessages.AnimalNotFound, animalId));
+                throw new CollectionDomainException(string.Format(ExceptionMessages.AnimalNotFound, animalId));
             }
 
             moltingAnimal.Molt(moltingDate);

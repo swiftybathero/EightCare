@@ -11,8 +11,8 @@ namespace EightCare.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            return services.AddDbContext<KeeperContext>()
-                           .AddScoped<IKeeperRepository, KeeperRepository>()
+            return services.AddDbContext<CollectionContext>()
+                           .AddScoped<ICollectionRepository, CollectionRepository>()
                            .Configure<DatabaseConfiguration>(configuration.GetSection(DatabaseConfiguration.Key));
         }
     }
