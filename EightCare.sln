@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EightCare.API", "src\EightCare.API\EightCare.API.csproj", "{A68B6B16-CE25-425C-A554-C4C6E22C258B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EightCare.Domain.UnitTests", "tests\EightCare.UnitTests\EightCare.Domain.UnitTests.csproj", "{B6CBD1B5-6A2D-43DE-B8B4-C7DCF60F5768}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EightCare.Domain.UnitTests", "tests\EightCare.Domain.UnitTests\EightCare.Domain.UnitTests.csproj", "{B6CBD1B5-6A2D-43DE-B8B4-C7DCF60F5768}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EightCare.Domain", "src\EightCare.Domain\EightCare.Domain.csproj", "{49D4CA39-AA7F-4B4F-8AED-0A3DD158623E}"
 EndProject
