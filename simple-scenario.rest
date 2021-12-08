@@ -1,1 +1,15 @@
-@api = https://localhost:5001
+@api = https://localhost:5001/api
+
+### 1. Create collection
+# @name create_collection
+POST {{api}}/collections
+Content-Type: application/json
+
+{
+  "name": "My Name",
+  "email": "keeper@email.com",
+  "age": 99
+}
+
+### 2. Get collection
+GET {{api}}/collections/{{create_collection.response.body.id}}
