@@ -68,11 +68,13 @@ namespace EightCare.Domain.Entities
                 throw new CollectionDomainException(ExceptionMessages.FeedAmountCannotBeLowerThanOne);
             }
 
+            // TODO: Provide DateTime.Now from external dependency
             _feedings.Add(new Feeding(feedingDate ?? DateTime.Now, amount));
         }
 
         public void Molt(DateTime? moltingDate = null)
         {
+            // TODO: Provide DateTime.Now from external dependency
             _molts.Add(new Molt(moltingDate ?? DateTime.UtcNow));
         }
     }
