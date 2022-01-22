@@ -8,14 +8,13 @@ using EightCare.API.IntegrationTests.Common.Extensions;
 using EightCare.Application.Collections.Commands.RegisterCollection;
 using EightCare.Application.Collections.Queries.GetCollectionById;
 using FluentAssertions;
-using Microsoft.AspNetCore.Mvc.Testing;
 using Xunit;
 
 namespace EightCare.API.IntegrationTests.Controllers
 {
     public class CollectionsControllerTests : BaseControllerTest
     {
-        public CollectionsControllerTests(WebApplicationFactory<Startup> factory) : base(factory) { }
+        public CollectionsControllerTests(TestApplicationFactory factory) : base(factory) { }
 
         [Fact]
         public async Task RegisterCollection_ShouldCreateCollection()
