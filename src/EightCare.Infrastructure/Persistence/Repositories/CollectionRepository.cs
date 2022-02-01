@@ -9,12 +9,12 @@ namespace EightCare.Infrastructure.Persistence.Repositories
     {
         private readonly CollectionContext _collectionContext;
 
+        public IUnitOfWork UnitOfWork => _collectionContext;
+
         public CollectionRepository(CollectionContext collectionContext)
         {
             _collectionContext = collectionContext;
         }
-
-        public IUnitOfWork UnitOfWork => _collectionContext;
 
         public async Task<Collection> GetByIdAsync(Guid collectionId)
         {
@@ -26,16 +26,9 @@ namespace EightCare.Infrastructure.Persistence.Repositories
             await _collectionContext.AddAsync(collection);
         }
 
-        public Task UpdateAsync(Collection collection)
-        {
-            _collectionContext.Update(collection);
-
-            return Task.CompletedTask;
-        }
-
         public Task DeleteAsync(Collection collection)
         {
-            _collectionContext.Collections.Remove(collection);
+            _collectionContext.Remove(collection);
 
             return Task.CompletedTask;
         }
