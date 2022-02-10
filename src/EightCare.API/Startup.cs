@@ -53,6 +53,8 @@ namespace EightCare.API
                        setup.RoutePrefix = string.Empty;
                    });
 
+                // Recreating database for development purposes
+                context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
             }
 
