@@ -17,7 +17,7 @@ namespace EightCare.API.IntegrationTests.Common
 
         protected BaseControllerTest(TestApplicationFactory factory)
         {
-            _checkpointConnectionString = factory.ConnectionString;
+            _checkpointConnectionString = factory.DatabaseConnectionString;
 
             Client = factory.CreateClient();
             Fixture = new Fixture();

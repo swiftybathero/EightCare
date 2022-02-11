@@ -1,24 +1,16 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Threading.Tasks;
 using EightCare.Application.Common.Interfaces;
 using EightCare.Domain.Entities;
-using EightCare.Infrastructure.Common.Configuration;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 
 namespace EightCare.Infrastructure.Persistence
 {
     public class CollectionContext : DbContext, IUnitOfWork
     {
-        private readonly DatabaseConfiguration _configuration;
-
         public DbSet<Collection> Collections { get; set; }
 
-        public CollectionContext(IOptions<DatabaseConfiguration> configuration)
-        {
-            _configuration = configuration.Value;
-        }
+        public CollectionContext(DbContextOptions<CollectionContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -28,13 +20,6 @@ namespace EightCare.Infrastructure.Persistence
         public async Task SaveChangesAsync()
         {
             await base.SaveChangesAsync();
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(_configuration.ConnectionString)
-                          .EnableSensitiveDataLogging() // TODO: Temporary logging
-                          .LogTo(Console.WriteLine);
         }
     }
 }

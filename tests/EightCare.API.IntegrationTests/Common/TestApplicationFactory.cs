@@ -1,15 +1,23 @@
 ﻿using EightCare.Infrastructure.Common.Configuration;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Configuration;
 
 namespace EightCare.API.IntegrationTests.Common
 {
     public class TestApplicationFactory : WebApplicationFactory<Startup>
     {
-        public string ConnectionString => Services
-                                          .GetRequiredService<IOptions<DatabaseConfiguration>>()
-                                          .Value
-                                          .ConnectionString;
+        private readonly IConfigurationRoot _configuration;
+
+        public TestApplicationFactory()
+        {
+            _configuration = new ConfigurationBuilder()
+                                .AddJsonFile("appsettings.json")
+                                .AddJsonFile("appsettings.Development.json")
+                                .AddEnvironmentVariables()
+                                .Build();
+        }
+
+        public string DatabaseConnectionString => _configuration.GetSection(DatabaseConfiguration.Key)
+                                                                .Get<DatabaseConfiguration>().ConnectionString;
     }
 }
