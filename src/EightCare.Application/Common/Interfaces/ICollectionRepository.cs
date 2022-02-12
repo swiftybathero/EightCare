@@ -8,6 +8,6 @@ namespace EightCare.Application.Common.Interfaces
     {
         Task<Collection> GetByIdAsync(Guid collectionId);
         Task AddAsync(Collection collection);
-        Task DeleteAsync(Collection collection);
+        Task DeleteAsync(Guid collectionId);
     }
 }

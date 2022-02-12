@@ -26,11 +26,12 @@ namespace EightCare.Infrastructure.Persistence.Repositories
             await _collectionContext.AddAsync(collection);
         }
 
-        public Task DeleteAsync(Collection collection)
+        public async Task DeleteAsync(Guid collectionId)
         {
-            _collectionContext.Remove(collection);
+            // TODO: Optimize - additional database call here
+            var collection = await GetByIdAsync(collectionId);
 
-            return Task.CompletedTask;
+            _collectionContext.Remove(collection);
         }
     }
 }
