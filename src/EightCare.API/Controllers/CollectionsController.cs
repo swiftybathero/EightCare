@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
+using EightCare.Application.Collections.Commands.DeleteCollection;
 using EightCare.Application.Collections.Commands.RegisterCollection;
 using EightCare.Application.Collections.Queries.GetCollectionById;
 
@@ -36,7 +37,22 @@ namespace EightCare.API.Controllers
         {
             var collectionModel = await _mediator.Send(new GetCollectionByIdQuery(collectionId));
 
+            if (collectionModel is null)
+            {
+                return NotFound();
+            }
+
             return Ok(collectionModel);
+        }
+
+        [HttpDelete]
+        [Route("{collectionId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> DeleteCollection([FromRoute] Guid collectionId)
+        {
+            await _mediator.Send(new DeleteCollectionCommand(collectionId));
+
+            return Ok();
         }
     }
 }

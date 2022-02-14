@@ -29,13 +29,14 @@ namespace EightCare.Application.Collections.Queries.GetCollectionById
         {
             var collection = await _collectionRepository.GetByIdAsync(request.CollectionId);
 
-            return new CollectionDto
+            // TODO: Fix with proper exception/result
+            return collection is not null ? new CollectionDto
             {
                 Id = collection.Id,
                 Name = collection.Name,
                 Email = collection.Email,
                 Age = collection.Age
-            };
+            } : null;
         }
     }
 }

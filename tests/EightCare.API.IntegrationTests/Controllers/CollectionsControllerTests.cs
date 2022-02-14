@@ -8,7 +8,7 @@ using EightCare.API.IntegrationTests.Common.Extensions;
 using EightCare.Application.Collections.Commands.RegisterCollection;
 using EightCare.Application.Collections.Queries.GetCollectionById;
 using FluentAssertions;
-using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Http;
 using Xunit;
 
 namespace EightCare.API.IntegrationTests.Controllers
@@ -59,10 +59,10 @@ namespace EightCare.API.IntegrationTests.Controllers
             var deleteCollectionResponse = await Client.DeleteAsync($"{Routes.CollectionRoute}/{collectionId}");
             deleteCollectionResponse.EnsureSuccessStatusCode();
 
-            var deletedCollection = await CallGetCollectionAsync(collectionId);
+            var getCollectionResponse = await Client.GetAsync($"{Routes.CollectionRoute}/{collectionId}");
 
             // Assert
-            deletedCollection.Should().BeNull();
+            getCollectionResponse.StatusCode.Should().Be(StatusCodes.Status404NotFound);
         }
 
         private async Task<HttpResponseMessage> CallCreateCollectionAsync()
