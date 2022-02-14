@@ -8,6 +8,7 @@ using EightCare.API.IntegrationTests.Common.Extensions;
 using EightCare.Application.Collections.Commands.RegisterCollection;
 using EightCare.Application.Collections.Queries.GetCollectionById;
 using FluentAssertions;
+using Microsoft.IdentityModel.Tokens;
 using Xunit;
 
 namespace EightCare.API.IntegrationTests.Controllers
@@ -37,11 +38,31 @@ namespace EightCare.API.IntegrationTests.Controllers
             var createdCollectionId = await response.Content.GetIdAsync();
 
             // Act
-            var createdCollection = await Client.GetFromJsonAsync<CollectionDto>($"{Routes.CollectionRoute}/{createdCollectionId}");
+            var createdCollection = await CallGetCollectionAsync(createdCollectionId);
 
             // Assert
             createdCollection.Should().NotBeNull();
             createdCollection?.Id.ToString().Should().Be(createdCollectionId);
+        }
+
+        [Fact]
+        public async Task DeleteCollection_CollectionExists_ShouldDeleteCollection()
+        {
+            // Arrange
+            var createCollectionResponse = await CallCreateCollectionAsync();
+            var collectionId = await createCollectionResponse.Content.GetIdAsync();
+
+            var createdCollection = await CallGetCollectionAsync(collectionId);
+            createdCollection.Should().NotBeNull();
+
+            // Act
+            var deleteCollectionResponse = await Client.DeleteAsync($"{Routes.CollectionRoute}/{collectionId}");
+            deleteCollectionResponse.EnsureSuccessStatusCode();
+
+            var deletedCollection = await CallGetCollectionAsync(collectionId);
+
+            // Assert
+            deletedCollection.Should().BeNull();
         }
 
         private async Task<HttpResponseMessage> CallCreateCollectionAsync()
@@ -52,6 +73,11 @@ namespace EightCare.API.IntegrationTests.Controllers
             response.EnsureSuccessStatusCode();
 
             return response;
+        }
+
+        private async Task<CollectionDto> CallGetCollectionAsync(string collectionId)
+        {
+            return await Client.GetFromJsonAsync<CollectionDto>($"{Routes.CollectionRoute}/{collectionId}");
         }
     }
 }
