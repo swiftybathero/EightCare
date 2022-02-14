@@ -11,6 +11,7 @@ namespace EightCare.Domain.Entities
         private readonly List<Feeding> _feedings;
         private readonly List<Molt> _molts;
 
+        // TODO: Refactor to Species ValueObject
         public string ScientificName { get; private set; }
         public string CommonName { get; private set; }
         public DateTime BuyDate { get; private set; }
@@ -34,7 +35,7 @@ namespace EightCare.Domain.Entities
         {
             if (string.IsNullOrEmpty(scientificName))
             {
-                throw new KeeperDomainException(ExceptionMessages.ScientificNameCannotBeEmpty);
+                throw new CollectionDomainException(ExceptionMessages.ScientificNameCannotBeEmpty);
             }
 
             ScientificName = scientificName;
@@ -54,7 +55,7 @@ namespace EightCare.Domain.Entities
         {
             if (buyAge < 1)
             {
-                throw new KeeperDomainException(ExceptionMessages.BuyAgeCannotBeLowerThanOne);
+                throw new CollectionDomainException(ExceptionMessages.BuyAgeCannotBeLowerThanOne);
             }
 
             BuyAge = buyAge;
@@ -64,14 +65,16 @@ namespace EightCare.Domain.Entities
         {
             if (amount < 1)
             {
-                throw new KeeperDomainException(ExceptionMessages.FeedAmountCannotBeLowerThanOne);
+                throw new CollectionDomainException(ExceptionMessages.FeedAmountCannotBeLowerThanOne);
             }
 
+            // TODO: Provide DateTime.Now from external dependency
             _feedings.Add(new Feeding(feedingDate ?? DateTime.Now, amount));
         }
 
         public void Molt(DateTime? moltingDate = null)
         {
+            // TODO: Provide DateTime.Now from external dependency
             _molts.Add(new Molt(moltingDate ?? DateTime.UtcNow));
         }
     }

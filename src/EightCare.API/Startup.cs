@@ -5,8 +5,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Diagnostics.CodeAnalysis;
+using EightCare.API.Common.Extensions;
 using EightCare.Application;
 using EightCare.Infrastructure;
+using EightCare.Infrastructure.Persistence;
 using Microsoft.OpenApi.Models;
 
 namespace EightCare.API
@@ -35,13 +37,13 @@ namespace EightCare.API
             });
 
             services.AddApplication();
-            services.AddInfrastructure();
+            services.AddInfrastructure(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, CollectionContext context)
         {
-            if (env.IsDevelopment())
+            if (env.IsDevelopment() || env.IsFunctionalTest())
             {
                 app.UseDeveloperExceptionPage();
 
@@ -51,6 +53,10 @@ namespace EightCare.API
                        setup.SwaggerEndpoint("/swagger/v1/swagger.json", "EightCare API V1");
                        setup.RoutePrefix = string.Empty;
                    });
+
+                // Recreating database for development purposes
+                context.Database.EnsureDeleted();
+                context.Database.EnsureCreated();
             }
 
             app.UseHttpsRedirection();
