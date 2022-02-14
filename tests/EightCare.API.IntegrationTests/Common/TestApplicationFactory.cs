@@ -24,8 +24,11 @@ namespace EightCare.API.IntegrationTests.Common
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
+#pragma warning disable CS0219 // Variable is assigned but its value is never used
+            const string FunctionalTestsEnvironment = Environments.FunctionalTest;
+#pragma warning restore CS0219 // Variable is assigned but its value is never used
 #if RELEASE
-            builder.UseEnvironment(Environments.FunctionalTest);
+            builder.UseEnvironment(FunctionalTestsEnvironment);
 #endif
             base.ConfigureWebHost(builder);
         }
