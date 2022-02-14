@@ -23,20 +23,18 @@ namespace EightCare.API.IntegrationTests.Controllers
             var response = await CallCreateCollectionAsync();
 
             // Assert
-            response.EnsureSuccessStatusCode();
-
-            var createdId = await response.Content.GetIdAsync();
-            createdId.Should().NotBeNullOrEmpty();
+            var createdCollectionId = await response.Content.GetIdAsync();
+            createdCollectionId.Should().NotBeNullOrEmpty();
             response.Headers.Location.Should().NotBeNull();
-            response.Headers.Location?.OriginalString.Should().Be($"{Routes.CollectionRoute}/{createdId}");
+            response.Headers.Location?.OriginalString.Should().Be($"{Routes.CollectionRoute}/{createdCollectionId}");
         }
 
         [Fact]
         public async Task GetCollectionById_ShouldReturnCreatedCollection()
         {
             // Arrange
-            var createCollectionResult = await CallCreateCollectionAsync();
-            var createdCollectionId = await createCollectionResult.Content.GetIdAsync();
+            var response = await CallCreateCollectionAsync();
+            var createdCollectionId = await response.Content.GetIdAsync();
 
             // Act
             var createdCollection = await Client.GetFromJsonAsync<CollectionDto>($"{Routes.CollectionRoute}/{createdCollectionId}");
