@@ -8,7 +8,7 @@ namespace EightCare.Infrastructure.Persistence
 {
     public class CollectionContext : DbContext, IUnitOfWork
     {
-        public DbSet<Collection> Collections { get; set; }
+        public DbSet<Collection>? Collections { get; set; } 
 
         public CollectionContext(DbContextOptions<CollectionContext> options) : base(options) { }
 

@@ -10,7 +10,7 @@ namespace EightCare.Domain.Common
 
         public void SetId(Guid id) => Id = id;
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is not Entity other)
                 return false;
@@ -27,7 +27,7 @@ namespace EightCare.Domain.Common
             return Id == other.Id;
         }
 
-        public static bool operator ==(Entity a, Entity b)
+        public static bool operator ==(Entity? a, Entity? b)
         {
             if (a is null && b is null)
                 return true;
@@ -38,7 +38,7 @@ namespace EightCare.Domain.Common
             return a.Equals(b);
         }
 
-        public static bool operator !=(Entity a, Entity b)
+        public static bool operator !=(Entity? a, Entity? b)
         {
             return !(a == b);
         }

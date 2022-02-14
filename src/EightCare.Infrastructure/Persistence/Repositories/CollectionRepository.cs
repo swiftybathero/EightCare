@@ -16,9 +16,9 @@ namespace EightCare.Infrastructure.Persistence.Repositories
             _collectionContext = collectionContext;
         }
 
-        public async Task<Collection> GetByIdAsync(Guid collectionId)
+        public async Task<Collection?> GetByIdAsync(Guid collectionId)
         {
-            return await _collectionContext.Collections.FindAsync(collectionId);
+            return await _collectionContext.Collections!.FindAsync(collectionId);
         }
 
         public async Task AddAsync(Collection collection)

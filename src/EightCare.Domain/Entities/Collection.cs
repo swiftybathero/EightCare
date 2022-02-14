@@ -38,7 +38,7 @@ namespace EightCare.Domain.Entities
         {
             var animalToFeed = FindAnimalById(animalId);
 
-            if (animalToFeed == null)
+            if (animalToFeed is null)
             {
                 throw new CollectionDomainException(string.Format(ExceptionMessages.AnimalNotFound, animalId));
             }
@@ -50,7 +50,7 @@ namespace EightCare.Domain.Entities
         {
             var moltingAnimal = FindAnimalById(animalId);
 
-            if (moltingAnimal == null)
+            if (moltingAnimal is null)
             {
                 throw new CollectionDomainException(string.Format(ExceptionMessages.AnimalNotFound, animalId));
             }
@@ -58,7 +58,7 @@ namespace EightCare.Domain.Entities
             moltingAnimal.Molt(moltingDate);
         }
 
-        private Animal FindAnimalById(Guid animalId)
+        private Animal? FindAnimalById(Guid animalId)
         {
             return _animals.FirstOrDefault(x => x.Id == animalId);
         }
