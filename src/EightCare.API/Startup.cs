@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Diagnostics.CodeAnalysis;
+using EightCare.API.Common.Extensions;
 using EightCare.Application;
 using EightCare.Infrastructure;
 using EightCare.Infrastructure.Persistence;
@@ -42,7 +43,7 @@ namespace EightCare.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, CollectionContext context)
         {
-            if (env.IsDevelopment())
+            if (env.IsDevelopment() || env.IsFunctionalTest())
             {
                 app.UseDeveloperExceptionPage();
 
