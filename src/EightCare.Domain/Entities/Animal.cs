@@ -12,8 +12,8 @@ namespace EightCare.Domain.Entities
         private readonly List<Molt> _molts;
 
         // TODO: Refactor to Species ValueObject
-        public string ScientificName { get; private set; }
-        public string CommonName { get; private set; }
+        public string ScientificName { get; private set; } = string.Empty;
+        public string CommonName { get; private set; } = string.Empty;
         public DateTime BuyDate { get; private set; }
         public int BuyAge { get; private set; }
         public int Age => BuyAge + _molts.Count;

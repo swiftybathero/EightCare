@@ -6,7 +6,7 @@ using MediatR;
 
 namespace EightCare.Application.Collections.Queries.GetCollectionById
 {
-    public class GetCollectionByIdQuery : IRequest<CollectionDto>
+    public class GetCollectionByIdQuery : IRequest<CollectionDto?>
     {
         public Guid CollectionId { get; init; }
 
@@ -16,7 +16,7 @@ namespace EightCare.Application.Collections.Queries.GetCollectionById
         }
     }
 
-    public class GetCollectionByIdQueryHandler : IRequestHandler<GetCollectionByIdQuery, CollectionDto>
+    public class GetCollectionByIdQueryHandler : IRequestHandler<GetCollectionByIdQuery, CollectionDto?>
     {
         private readonly ICollectionRepository _collectionRepository;
 
@@ -25,7 +25,7 @@ namespace EightCare.Application.Collections.Queries.GetCollectionById
             _collectionRepository = collectionRepository;
         }
 
-        public async Task<CollectionDto> Handle(GetCollectionByIdQuery request, CancellationToken cancellationToken)
+        public async Task<CollectionDto?> Handle(GetCollectionByIdQuery request, CancellationToken cancellationToken)
         {
             var collection = await _collectionRepository.GetByIdAsync(request.CollectionId);
 
