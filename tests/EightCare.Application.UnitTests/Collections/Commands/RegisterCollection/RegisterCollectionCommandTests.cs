@@ -37,6 +37,7 @@ namespace EightCare.Application.UnitTests.Collections.Commands.RegisterCollectio
 
             // Assert
             await _collectionRepository.Received(1).AddAsync(Arg.Any<Collection>());
+            await _collectionRepository.UnitOfWork.Received(1).SaveChangesAsync();
         }
     }
 }
