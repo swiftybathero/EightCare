@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using AutoFixture;
 using AutoFixture.AutoNSubstitute;
 using EightCare.API.Controllers;
+using EightCare.Application.Collections.Commands.DeleteCollection;
 using EightCare.Application.Collections.Commands.RegisterCollection;
 using EightCare.Application.Collections.Queries.GetCollectionById;
 using MediatR;
@@ -50,6 +51,19 @@ namespace EightCare.API.UnitTests.Controllers
 
             // Assert
             await _mediator.Received(1).Send(Arg.Is<GetCollectionByIdQuery>(x => x.CollectionId == collectionId));
+        }
+
+        [Fact]
+        public async Task DeleteCollection_ShouldSendDeleteCollectionCommand()
+        {
+            // Arrange
+            var collectionId = _fixture.Create<Guid>();
+
+            // Act
+            await _collectionsController.DeleteCollection(collectionId);
+
+            // Assert
+            await _mediator.Received(1).Send(Arg.Is<DeleteCollectionCommand>(x => x.CollectionId == collectionId));
         }
     }
 }
