@@ -4,7 +4,7 @@ using AutoFixture;
 using Respawn;
 using Xunit;
 
-namespace EightCare.API.IntegrationTests.Common
+namespace EightCare.API.FunctionalTests.Common
 {
     public abstract class BaseControllerTest : IClassFixture<TestApplicationFactory>, IAsyncLifetime
     {

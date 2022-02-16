@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 
-namespace EightCare.API.IntegrationTests.Common.Extensions
+namespace EightCare.API.FunctionalTests.Common.Extensions
 {
     public static class HttpContentExtensions
     {

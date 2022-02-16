@@ -3,19 +3,19 @@ using System.Net.Http.Json;
 using System.Threading.Tasks;
 using AutoFixture;
 using EightCare.API.Constants;
-using EightCare.API.IntegrationTests.Common;
-using EightCare.API.IntegrationTests.Common.Extensions;
+using EightCare.API.FunctionalTests.Common;
+using EightCare.API.FunctionalTests.Common.Extensions;
 using EightCare.Application.Collections.Commands.RegisterCollection;
 using EightCare.Application.Collections.Queries.GetCollectionById;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using Xunit;
 
-namespace EightCare.API.IntegrationTests.Controllers
+namespace EightCare.API.FunctionalTests
 {
-    public class CollectionsControllerTests : BaseControllerTest
+    public class CollectionTests : BaseControllerTest
     {
-        public CollectionsControllerTests(TestApplicationFactory factory) : base(factory) { }
+        public CollectionTests(TestApplicationFactory factory) : base(factory) { }
 
         [Fact]
         public async Task RegisterCollection_ShouldCreateCollection()

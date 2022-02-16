@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.Configuration;
 
-namespace EightCare.API.IntegrationTests.Common
+namespace EightCare.API.FunctionalTests.Common
 {
     public class TestApplicationFactory : WebApplicationFactory<Startup>
     {
