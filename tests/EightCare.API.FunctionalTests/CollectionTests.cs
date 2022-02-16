@@ -18,7 +18,7 @@ namespace EightCare.API.FunctionalTests
         public CollectionTests(TestApplicationFactory factory) : base(factory) { }
 
         [Fact]
-        public async Task RegisterCollection_ShouldCreateCollection()
+        public async Task RegisterCollection_WithCorrectData_CreatesCollection()
         {
             // Arrange // Act
             var response = await CallCreateCollectionAsync();
@@ -31,7 +31,7 @@ namespace EightCare.API.FunctionalTests
         }
 
         [Fact]
-        public async Task GetCollectionById_ShouldReturnCreatedCollection()
+        public async Task GetCollectionById_WithCorrectId_ReturnsCollection()
         {
             // Arrange
             var response = await CallCreateCollectionAsync();
@@ -46,7 +46,7 @@ namespace EightCare.API.FunctionalTests
         }
 
         [Fact]
-        public async Task DeleteCollection_CollectionExists_ShouldDeleteCollection()
+        public async Task DeleteCollection_WithExistingCollection_DeletesCollection()
         {
             // Arrange
             var createCollectionResponse = await CallCreateCollectionAsync();
