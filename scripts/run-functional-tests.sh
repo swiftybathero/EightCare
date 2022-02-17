@@ -1,4 +1,8 @@
 #!/bin/bash
 cd tests/EightCare.API.FunctionalTests
-dotnet build
-dotnet test --no-build --logger:"console;verbosity=normal"
+
+config=${1:-Debug}
+
+echo Detected configuration: $config
+
+dotnet test -c $config --logger:"console;verbosity=normal"
