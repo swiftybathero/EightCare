@@ -1,8 +1,8 @@
 #!/bin/bash
 cd tests/EightCare.API.FunctionalTests
 
-config=${1:-Debug}
+runAgainstProd=${1:-false}
 
-echo Detected configuration: $config
+echo Running against Production database: $runAgainstProd
 
-dotnet test -c $config --logger:"console;verbosity=normal"
+dotnet test -c Release -e RunAgainstProductionDatabase=$runAgainstProd --logger:"console;verbosity=normal" 

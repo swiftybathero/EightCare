@@ -1,36 +1,58 @@
-﻿using EightCare.API.Common.Extensions;
-using EightCare.Infrastructure.Common.Configuration;
+﻿using System;
+using EightCare.API.Common;
+using EightCare.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace EightCare.API.FunctionalTests.Common
 {
     public class TestApplicationFactory : WebApplicationFactory<Startup>
     {
-        private readonly IConfigurationRoot _configuration;
-
-        public TestApplicationFactory()
-        {
-            _configuration = new ConfigurationBuilder()
-                                .AddJsonFile("appsettings.json")
-                                .AddJsonFile("appsettings.Development.json")
-                                .AddEnvironmentVariables()
-                                .Build();
-        }
-
-        public string DatabaseConnectionString => _configuration.GetSection(DatabaseConfiguration.Key)
-                                                                .Get<DatabaseConfiguration>().ConnectionString;
+        public string DatabaseConnectionString => GetDatabaseConnectionString();
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
-#pragma warning disable CS0219 // Variable is assigned but its value is never used
-            const string FunctionalTestsEnvironment = Environments.FunctionalTest;
-#pragma warning restore CS0219 // Variable is assigned but its value is never used
-#if RELEASE
-            builder.UseEnvironment(FunctionalTestsEnvironment);
-#endif
-            base.ConfigureWebHost(builder);
+            builder.UseEnvironment(Environments.FunctionalTest);
+
+            builder.ConfigureAppConfiguration(configuration =>
+                configuration.AddJsonFile("appsettings.Development.json")
+            );
+
+            if (ShouldRunAgainstProductionDatabase())
+            {
+                builder.ConfigureAppConfiguration(configuration =>
+                {
+                    configuration.AddJsonFile("appsettings.json");
+                });
+            }
+
+            builder.ConfigureServices(services =>
+            {
+                var serviceProvider = services.BuildServiceProvider();
+
+                using var scope = serviceProvider.CreateScope();
+                using var context = scope.ServiceProvider.GetRequiredService<CollectionContext>();
+
+                context.Database.EnsureDeleted();
+                context.Database.EnsureCreated();
+            });
+        }
+
+        private static bool ShouldRunAgainstProductionDatabase()
+        {
+            return bool.TryParse(Environment.GetEnvironmentVariable("RunAgainstProductionDatabase"),
+                out var testProductionDatabase) && testProductionDatabase;
+        }
+
+        private string GetDatabaseConnectionString()
+        {
+            using var scope = Services.CreateScope();
+            using var context = scope.ServiceProvider.GetRequiredService<CollectionContext>();
+
+            return context.Database.GetConnectionString();
         }
     }
 }
