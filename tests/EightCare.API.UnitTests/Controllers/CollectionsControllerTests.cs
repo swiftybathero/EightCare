@@ -28,7 +28,7 @@ namespace EightCare.API.UnitTests.Controllers
         }
 
         [Fact]
-        public async Task RegisterCollection_ShouldSendRegisterCommand()
+        public async Task RegisterCollection_SendsRegisterCommand()
         {
             // Arrange
             var registerCollectionCommand = _fixture.Create<RegisterCollectionCommand>();
@@ -41,7 +41,7 @@ namespace EightCare.API.UnitTests.Controllers
         }
 
         [Fact]
-        public async Task GetCollectionById_ShouldSendGetByIdQuery()
+        public async Task GetCollectionById_SendsGetByIdQuery()
         {
             // Arrange
             var collectionId = _fixture.Create<Guid>();
@@ -54,7 +54,7 @@ namespace EightCare.API.UnitTests.Controllers
         }
 
         [Fact]
-        public async Task DeleteCollection_ShouldSendDeleteCollectionCommand()
+        public async Task DeleteCollection_SendsDeleteCollectionCommand()
         {
             // Arrange
             var collectionId = _fixture.Create<Guid>();

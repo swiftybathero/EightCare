@@ -27,7 +27,7 @@ namespace EightCare.Application.UnitTests.Collections.Commands.RegisterCollectio
         }
 
         [Fact]
-        public async Task Handle_ShouldAddToRepository()
+        public async Task Handle_AddsToRepository()
         {
             // Arrange
             var command = _fixture.Create<RegisterCollectionCommand>();

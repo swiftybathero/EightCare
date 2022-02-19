@@ -28,7 +28,7 @@ namespace EightCare.Application.UnitTests.Collections.Queries.GetCollectionById
         }
 
         [Fact]
-        public async Task Handle_ShouldReturnCollection()
+        public async Task Handle_WithExistingCollection_ReturnsCollection()
         {
             // Arrange
             var collection = _fixture.Create<Collection>();

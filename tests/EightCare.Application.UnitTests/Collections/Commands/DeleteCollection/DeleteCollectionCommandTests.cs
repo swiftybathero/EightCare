@@ -27,7 +27,7 @@ namespace EightCare.Application.UnitTests.Collections.Commands.DeleteCollection
         }
 
         [Fact]
-        public async Task Handle_ShouldDeleteUsingRepository()
+        public async Task Handle_DeletesUsingRepository()
         {
             // Arrange
             var command = _fixture.Create<DeleteCollectionCommand>();

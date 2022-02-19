@@ -26,7 +26,7 @@ namespace EightCare.Infrastructure.UnitTests.Repositories
         }
 
         [Fact]
-        public async Task AddAsync_ShouldAddCollection()
+        public async Task AddAsync_AddsCollection()
         {
             // Arrange
             var collection = _fixture.Create<Collection>();
@@ -39,7 +39,7 @@ namespace EightCare.Infrastructure.UnitTests.Repositories
         }
 
         [Fact]
-        public async Task RemoveAsync_ShouldRemoveCollection()
+        public async Task RemoveAsync_WithExistingCollection_RemovesCollection()
         {
             // Arrange
             var collection = _fixture.Create<Collection>();

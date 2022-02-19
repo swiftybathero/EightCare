@@ -22,7 +22,7 @@ namespace EightCare.Domain.UnitTests.Domain
         }
 
         [Fact]
-        public void New_ShouldCreateCollection()
+        public void New_WithCorrectData_CreatesCollection()
         {
             // Arrange
             var name = _fixture.Create<string>();
@@ -40,7 +40,7 @@ namespace EightCare.Domain.UnitTests.Domain
         }
 
         [Fact]
-        public void AddNewAnimal_ShouldAddAnimal()
+        public void AddNewAnimal_WithCorrectData_AddsAnimal()
         {
             // Arrange
             var collection = _collectionBuilder.Create();
@@ -63,7 +63,7 @@ namespace EightCare.Domain.UnitTests.Domain
         [Theory]
         [InlineData(null)]
         [InlineData("")]
-        public void AddNewAnimal_NoScientificName_ShouldThrowDomainException(string scientificName)
+        public void AddNewAnimal_NoScientificName_ThrowsDomainException(string scientificName)
         {
             // Arrange
             var collection = _collectionBuilder.Create();
@@ -84,7 +84,7 @@ namespace EightCare.Domain.UnitTests.Domain
         [Theory]
         [InlineData(0)]
         [InlineData(-1)]
-        public void AddNewAnimal_InvalidBuyAge_ShouldThrowDomainException(int buyAge)
+        public void AddNewAnimal_InvalidBuyAge_ThrowsDomainException(int buyAge)
         {
             // Arrange
             var collection = _collectionBuilder.Create();
@@ -103,7 +103,7 @@ namespace EightCare.Domain.UnitTests.Domain
         }
 
         [Fact]
-        public void FeedAnimal_AnimalExists_ShouldFeedAnimal()
+        public void FeedAnimal_AnimalExists_FeedsAnimal()
         {
             // Arrange
             const int FeedAmount = 1;
@@ -121,7 +121,7 @@ namespace EightCare.Domain.UnitTests.Domain
         }
 
         [Fact]
-        public void FeedAnimal_NoParameters_ShouldFeedAnimalWithDefaultValues()
+        public void FeedAnimal_NoParameters_FeedsAnimalWithDefaultValues()
         {
             // Arrange
             const int ExpectedDefaultAmount = 1;
@@ -138,7 +138,7 @@ namespace EightCare.Domain.UnitTests.Domain
         }
 
         [Fact]
-        public void FeedAnimal_AnimalDoesNotExist_ShouldThrowException()
+        public void FeedAnimal_AnimalDoesNotExist_ThrowsDomainException()
         {
             // Arrange
             var collection = _collectionBuilder.BuildDefault().WithAnimals().Create();
@@ -154,7 +154,7 @@ namespace EightCare.Domain.UnitTests.Domain
         [Theory]
         [InlineData(0)]
         [InlineData(-1)]
-        public void FeedAnimal_AmountLowerThanOne_ShouldThrowException(int amount)
+        public void FeedAnimal_AmountLowerThanOne_ThrowsDomainException(int amount)
         {
             // Arrange
             var existingAnimalId = _fixture.Create<Guid>();
@@ -168,7 +168,7 @@ namespace EightCare.Domain.UnitTests.Domain
         }
 
         [Fact]
-        public void ReportMolt_ShouldReportMolt()
+        public void ReportMolt_WithCorrectAnimal_ReportsMolt()
         {
             // Arrange
             var existingAnimalId = _fixture.Create<Guid>();
@@ -185,7 +185,7 @@ namespace EightCare.Domain.UnitTests.Domain
         }
 
         [Fact]
-        public void ReportMolt_NoDate_ShouldReportDefaultDate()
+        public void ReportMolt_NoDate_ReportsDefaultDate()
         {
             // Arrange
             var existingAnimalId = _fixture.Create<Guid>();
@@ -201,7 +201,7 @@ namespace EightCare.Domain.UnitTests.Domain
         }
 
         [Fact]
-        public void ReportMolt_AnimalDoesNotExist_ShouldThrowException()
+        public void ReportMolt_AnimalDoesNotExist_ThrowsDomainException()
         {
             // Arrange
             var collection = _collectionBuilder.BuildDefault().WithAnimals().Create();
