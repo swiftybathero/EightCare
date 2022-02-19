@@ -6,7 +6,7 @@ using Xunit;
 
 namespace EightCare.API.FunctionalTests.Common
 {
-    public abstract class BaseControllerTest : IClassFixture<TestApplicationFactory>, IAsyncLifetime
+    public abstract class BaseFunctionalTest : IClassFixture<TestApplicationFactory>, IAsyncLifetime
     {
         private readonly string _checkpointConnectionString;
 
@@ -15,7 +15,7 @@ namespace EightCare.API.FunctionalTests.Common
 
         private static readonly Checkpoint Checkpoint = new();
 
-        protected BaseControllerTest(TestApplicationFactory factory)
+        protected BaseFunctionalTest(TestApplicationFactory factory)
         {
             _checkpointConnectionString = factory.DatabaseConnectionString;
 

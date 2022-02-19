@@ -1,10 +1,9 @@
-﻿using System;
-using EightCare.API.Common;
+﻿using EightCare.API.Common;
+using EightCare.API.FunctionalTests.Common.Extensions;
 using EightCare.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace EightCare.API.FunctionalTests.Common
@@ -17,17 +16,7 @@ namespace EightCare.API.FunctionalTests.Common
         {
             builder.UseEnvironment(Environments.FunctionalTest);
 
-            builder.ConfigureAppConfiguration(configuration =>
-                configuration.AddJsonFile("appsettings.Development.json")
-            );
-
-            if (ShouldRunAgainstProductionDatabase())
-            {
-                builder.ConfigureAppConfiguration(configuration =>
-                {
-                    configuration.AddJsonFile("appsettings.json");
-                });
-            }
+            builder.ConfigureTestDatabase();
 
             builder.ConfigureServices(services =>
             {
@@ -39,12 +28,6 @@ namespace EightCare.API.FunctionalTests.Common
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
             });
-        }
-
-        private static bool ShouldRunAgainstProductionDatabase()
-        {
-            return bool.TryParse(Environment.GetEnvironmentVariable("RunAgainstProductionDatabase"),
-                out var testProductionDatabase) && testProductionDatabase;
         }
 
         private string GetDatabaseConnectionString()

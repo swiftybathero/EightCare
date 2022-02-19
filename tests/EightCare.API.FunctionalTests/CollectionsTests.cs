@@ -13,9 +13,9 @@ using Xunit;
 
 namespace EightCare.API.FunctionalTests
 {
-    public class CollectionTests : BaseControllerTest
+    public class CollectionsTests : BaseFunctionalTest
     {
-        public CollectionTests(TestApplicationFactory factory) : base(factory) { }
+        public CollectionsTests(TestApplicationFactory factory) : base(factory) { }
 
         [Fact]
         public async Task RegisterCollection_WithCorrectData_CreatesCollection()
