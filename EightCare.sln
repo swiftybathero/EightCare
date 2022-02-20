@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EightCare.API", "src\EightCare.API\EightCare.API.csproj", "{A68B6B16-CE25-425C-A554-C4C6E22C258B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EightCare.Domain.UnitTests", "tests\EightCare.Domain.UnitTests\EightCare.Domain.UnitTests.csproj", "{B6CBD1B5-6A2D-43DE-B8B4-C7DCF60F5768}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EightCare.Domain.UnitTests", "tests\UnitTests\EightCare.Domain.UnitTests\EightCare.Domain.UnitTests.csproj", "{B6CBD1B5-6A2D-43DE-B8B4-C7DCF60F5768}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EightCare.Domain", "src\EightCare.Domain\EightCare.Domain.csproj", "{49D4CA39-AA7F-4B4F-8AED-0A3DD158623E}"
 EndProject
@@ -17,9 +17,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{DBDFB2DF
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EightCare.Application", "src\EightCare.Application\EightCare.Application.csproj", "{FF104202-3747-44A3-A8D5-985406BC3E1E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EightCare.Infrastructure.UnitTests", "tests\EightCare.Infrastructure.UnitTests\EightCare.Infrastructure.UnitTests.csproj", "{12A40ECA-D38F-4693-B278-84D340514C85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EightCare.Infrastructure.UnitTests", "tests\UnitTests\EightCare.Infrastructure.UnitTests\EightCare.Infrastructure.UnitTests.csproj", "{12A40ECA-D38F-4693-B278-84D340514C85}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EightCare.Application.UnitTests", "tests\EightCare.Application.UnitTests\EightCare.Application.UnitTests.csproj", "{8AE4B7C2-B301-4785-9EE9-4A2DAEA7A971}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EightCare.Application.UnitTests", "tests\UnitTests\EightCare.Application.UnitTests\EightCare.Application.UnitTests.csproj", "{8AE4B7C2-B301-4785-9EE9-4A2DAEA7A971}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{45E904A3-E35E-437D-93FD-ACF76D217BB5}"
 	ProjectSection(SolutionItems) = preProject
@@ -35,9 +35,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		.github\workflows\dotnet-sonar-build.yml = .github\workflows\dotnet-sonar-build.yml
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EightCare.API.FunctionalTests", "tests\EightCare.API.FunctionalTests\EightCare.API.FunctionalTests.csproj", "{2F72C153-5606-4503-87EA-AEB8C393B41E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EightCare.API.FunctionalTests", "tests\FunctionalTests\EightCare.API.FunctionalTests\EightCare.API.FunctionalTests.csproj", "{2F72C153-5606-4503-87EA-AEB8C393B41E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EightCare.API.UnitTests", "tests\EightCare.API.UnitTests\EightCare.API.UnitTests.csproj", "{BF45F07B-D6B1-429D-8400-8AD7D17355CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EightCare.API.UnitTests", "tests\UnitTests\EightCare.API.UnitTests\EightCare.API.UnitTests.csproj", "{BF45F07B-D6B1-429D-8400-8AD7D17355CE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{0821ACEE-B5DA-4B1F-BC3C-7D9B515CBE9F}"
 EndProject

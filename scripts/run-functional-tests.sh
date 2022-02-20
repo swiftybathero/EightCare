@@ -1,5 +1,5 @@
 #!/bin/bash
-cd tests/EightCare.API.FunctionalTests
+cd tests/FunctionalTests/EightCare.API.FunctionalTests
 
 runAgainstProd=${1:-false}
 
