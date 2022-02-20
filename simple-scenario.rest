@@ -12,4 +12,8 @@ Content-Type: application/json
 }
 
 ### 2. Get collection
+# @name get_collection
 GET {{api}}/collections/{{create_collection.response.body.id}}
+
+### 3. Remove collection
+DELETE {{api}}/collections/{{get_collection.response.body.id}}
