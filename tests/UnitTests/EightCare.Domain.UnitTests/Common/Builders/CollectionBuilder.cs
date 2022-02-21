@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Generic;
 using AutoFixture;
 using EightCare.Domain.Entities;
 
@@ -7,57 +7,46 @@ namespace EightCare.Domain.UnitTests.Common.Builders
 {
     public class CollectionBuilder
     {
-        private readonly IFixture _fixture;
-        private Collection _collection;
+        private readonly string _name;
+        private readonly string _email;
+        private readonly int _age;
+        private List<Animal> _animals = new();
 
-        public CollectionBuilder()
+        private CollectionBuilder()
         {
-            _fixture = new Fixture();
+            IFixture fixture = new Fixture();
+
+            _name = fixture.Create<string>();
+            _email = fixture.Create<string>();
+            _age = fixture.Create<int>();
         }
 
-        public CollectionBuilder Build(string name, string email, int age)
+        public static CollectionBuilder GivenCollection()
         {
-            _collection = new Collection(name, email, age);
+            return new CollectionBuilder();
+        }
+
+        public CollectionBuilder WithAnimals(Action<IAnimalsBuilder> customizeAnimals = null)
+        {
+            var animalsBuilder = new AnimalsBuilder();
+            customizeAnimals?.Invoke(animalsBuilder);
+
+            _animals = animalsBuilder.Build();
 
             return this;
         }
 
-        public CollectionBuilder BuildDefault()
+        public Collection Build()
         {
-            _collection = CreateDefaultCollection();
+            var collection = new Collection(_name, _email, _age);
 
-            return this;
-        }
-
-        public Collection Create()
-        {
-            return _collection ?? CreateDefaultCollection();
-        }
-
-        public CollectionBuilder WithAnimals(params Guid[] animalIds)
-        {
-            if (animalIds.Length == 0)
+            foreach (var animal in _animals)
             {
-                animalIds = _fixture.CreateMany<Guid>().ToArray();
-            }
-            
-            foreach (var animalId in animalIds)
-            {
-                var scientificName = _fixture.Create<string>();
-                var commonName = _fixture.Create<string>();
-                var buyDate = _fixture.Create<DateTime>();
-                var buyAge = _fixture.Create<int>();
-
-                var createdAnimal = _collection.AddNewAnimal(scientificName, commonName, buyDate, buyAge);
-                createdAnimal.SetId(animalId);
+                var createdAnimal = collection.AddNewAnimal(animal.ScientificName, animal.CommonName, animal.BuyDate, animal.BuyAge);
+                createdAnimal.SetId(animal.Id);
             }
 
-            return this;
-        }
-
-        private Collection CreateDefaultCollection()
-        {
-            return _fixture.Create<Collection>();
+            return collection;
         }
     }
 }

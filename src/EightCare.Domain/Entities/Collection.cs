@@ -25,6 +25,7 @@ namespace EightCare.Domain.Entities
             _animals = new List<Animal>();
         }
 
+        // TODO: Returning Animal here for Unit Test purposes only - will fix only after ID generation place change
         public Animal AddNewAnimal(string scientificName, string commonName, DateTime buyDate, int buyAge)
         {
             var newAnimal = new Animal(scientificName, commonName, buyDate, buyAge);
