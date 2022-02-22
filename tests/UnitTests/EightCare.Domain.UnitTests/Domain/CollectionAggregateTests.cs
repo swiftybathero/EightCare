@@ -4,21 +4,19 @@ using AutoFixture;
 using EightCare.Domain.Entities;
 using EightCare.Domain.Exceptions;
 using EightCare.Domain.Properties;
-using EightCare.Domain.UnitTests.Common.Builders;
 using FluentAssertions;
 using Xunit;
+using static EightCare.Domain.UnitTests.Common.Builders.CollectionBuilder;
 
 namespace EightCare.Domain.UnitTests.Domain
 {
     public class CollectionAggregateTests
     {
         private readonly IFixture _fixture;
-        private readonly CollectionBuilder _collectionBuilder;
 
         public CollectionAggregateTests()
         {
             _fixture = new Fixture();
-            _collectionBuilder = new CollectionBuilder();
         }
 
         [Fact]
@@ -43,7 +41,7 @@ namespace EightCare.Domain.UnitTests.Domain
         public void AddNewAnimal_WithCorrectData_AddsAnimal()
         {
             // Arrange
-            var collection = _collectionBuilder.Create();
+            var collection = GivenCollection().Build();
             var expectedAnimal = _fixture.Create<Animal>();
 
             // Act
@@ -66,7 +64,7 @@ namespace EightCare.Domain.UnitTests.Domain
         public void AddNewAnimal_NoScientificName_ThrowsDomainException(string scientificName)
         {
             // Arrange
-            var collection = _collectionBuilder.Create();
+            var collection = GivenCollection().Build();
 
             // Act // Assert
             collection.Invoking(x => x.AddNewAnimal
@@ -87,7 +85,7 @@ namespace EightCare.Domain.UnitTests.Domain
         public void AddNewAnimal_InvalidBuyAge_ThrowsDomainException(int buyAge)
         {
             // Arrange
-            var collection = _collectionBuilder.Create();
+            var collection = GivenCollection().Build();
 
             // Act // Assert
             collection.Invoking(x => x.AddNewAnimal
@@ -110,7 +108,7 @@ namespace EightCare.Domain.UnitTests.Domain
 
             var existingAnimalId = _fixture.Create<Guid>();
             var feedingDate = _fixture.Create<DateTime>();
-            var collection = _collectionBuilder.BuildDefault().WithAnimals(existingAnimalId).Create();
+            var collection = GivenCollection().WithAnimals(animals => animals.WithIds(existingAnimalId)).Build();
             var animal = collection.Animals.First(x => x.Id == existingAnimalId);
 
             // Act
@@ -127,7 +125,7 @@ namespace EightCare.Domain.UnitTests.Domain
             const int ExpectedDefaultAmount = 1;
 
             var existingAnimalId = _fixture.Create<Guid>();
-            var collection = _collectionBuilder.BuildDefault().WithAnimals(existingAnimalId).Create();
+            var collection = GivenCollection().WithAnimals(animals => animals.WithIds(existingAnimalId)).Build();
             var animal = collection.Animals.First(x => x.Id == existingAnimalId);
 
             // Act
@@ -141,7 +139,7 @@ namespace EightCare.Domain.UnitTests.Domain
         public void FeedAnimal_AnimalDoesNotExist_ThrowsDomainException()
         {
             // Arrange
-            var collection = _collectionBuilder.BuildDefault().WithAnimals().Create();
+            var collection = GivenCollection().WithAnimals().Build();
             var notExistingAnimalId = _fixture.Create<Guid>();
 
             // Act // Assert
@@ -154,11 +152,11 @@ namespace EightCare.Domain.UnitTests.Domain
         [Theory]
         [InlineData(0)]
         [InlineData(-1)]
-        public void FeedAnimal_AmountLowerThanOne_ThrowsDomainException(int amount)
+        public void FeedAnimal_AmountEqualOrLowerThanOne_ThrowsDomainException(int amount)
         {
             // Arrange
             var existingAnimalId = _fixture.Create<Guid>();
-            var collection = _collectionBuilder.BuildDefault().WithAnimals(existingAnimalId).Create();
+            var collection = GivenCollection().WithAnimals(animals => animals.WithIds(existingAnimalId)).Build();
 
             // Act // Assert
             collection.Invoking(x => x.FeedAnimal(existingAnimalId, amount))
@@ -172,7 +170,7 @@ namespace EightCare.Domain.UnitTests.Domain
         {
             // Arrange
             var existingAnimalId = _fixture.Create<Guid>();
-            var collection = _collectionBuilder.BuildDefault().WithAnimals(existingAnimalId).Create();
+            var collection = GivenCollection().WithAnimals(animals => animals.WithIds(existingAnimalId)).Build();
 
             var moltingDate = _fixture.Create<DateTime>();
             var moltingAnimal = collection.Animals.First(x => x.Id == existingAnimalId);
@@ -189,7 +187,7 @@ namespace EightCare.Domain.UnitTests.Domain
         {
             // Arrange
             var existingAnimalId = _fixture.Create<Guid>();
-            var collection = _collectionBuilder.BuildDefault().WithAnimals(existingAnimalId).Create();
+            var collection = GivenCollection().WithAnimals(animals => animals.WithIds(existingAnimalId)).Build();
 
             var moltingAnimal = collection.Animals.First(x => x.Id == existingAnimalId);
 
@@ -204,7 +202,7 @@ namespace EightCare.Domain.UnitTests.Domain
         public void ReportMolt_AnimalDoesNotExist_ThrowsDomainException()
         {
             // Arrange
-            var collection = _collectionBuilder.BuildDefault().WithAnimals().Create();
+            var collection = GivenCollection().WithAnimals().Build();
             var notExistingAnimalId = _fixture.Create<Guid>();
 
             // Act // Assert
