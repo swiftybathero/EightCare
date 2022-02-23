@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using EightCare.Application.Common.Exceptions;
 using EightCare.Application.Common.Interfaces;
 using MediatR;
 
 namespace EightCare.Application.Collections.Queries.GetCollectionById
 {
-    public class GetCollectionByIdQuery : IRequest<CollectionDto?>
+    public class GetCollectionByIdQuery : IRequest<CollectionDto>
     {
         public Guid CollectionId { get; init; }
 
@@ -16,7 +17,7 @@ namespace EightCare.Application.Collections.Queries.GetCollectionById
         }
     }
 
-    public class GetCollectionByIdQueryHandler : IRequestHandler<GetCollectionByIdQuery, CollectionDto?>
+    public class GetCollectionByIdQueryHandler : IRequestHandler<GetCollectionByIdQuery, CollectionDto>
     {
         private readonly ICollectionRepository _collectionRepository;
 
@@ -25,18 +26,22 @@ namespace EightCare.Application.Collections.Queries.GetCollectionById
             _collectionRepository = collectionRepository;
         }
 
-        public async Task<CollectionDto?> Handle(GetCollectionByIdQuery request, CancellationToken cancellationToken)
+        public async Task<CollectionDto> Handle(GetCollectionByIdQuery request, CancellationToken cancellationToken)
         {
             var collection = await _collectionRepository.GetByIdAsync(request.CollectionId);
 
-            // TODO: Fix with proper exception/result
-            return collection is not null ? new CollectionDto
+            if (collection is null)
+            {
+                throw new EntityNotFoundException($"Collection with Id {request.CollectionId} could not be found.");
+            }
+
+            return new CollectionDto
             {
                 Id = collection.Id,
                 Name = collection.Name,
                 Email = collection.Email,
-                Age = collection.Age
-            } : null;
+                Age = collection.Age,
+            };
         }
     }
 }
