@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using AutoFixture;
@@ -46,6 +47,19 @@ namespace EightCare.API.FunctionalTests
         }
 
         [Fact]
+        public async Task GetCollectionById_WithNonExistingCollection_ReturnsNotFound()
+        {
+            // Arrange
+            var nonExistingCollectionId = Fixture.Create<Guid>();
+
+            // Act
+            var response = await Client.GetAsync($"{Routes.CollectionRoute}/{nonExistingCollectionId}");
+
+            // Assert
+            response.StatusCode.Should().Be(StatusCodes.Status404NotFound);
+        }
+
+        [Fact]
         public async Task DeleteCollection_WithExistingCollection_DeletesCollection()
         {
             // Arrange
@@ -65,6 +79,7 @@ namespace EightCare.API.FunctionalTests
             getCollectionResponse.StatusCode.Should().Be(StatusCodes.Status404NotFound);
         }
 
+        // TODO: Refactor those helper methods
         private async Task<HttpResponseMessage> CallCreateCollectionAsync()
         {
             var registerCollectionCommand = Fixture.Create<RegisterCollectionCommand>();

@@ -37,11 +37,6 @@ namespace EightCare.API.Controllers
         {
             var collectionModel = await _mediator.Send(new GetCollectionByIdQuery(collectionId));
 
-            if (collectionModel is null)
-            {
-                return NotFound();
-            }
-
             return Ok(collectionModel);
         }
 

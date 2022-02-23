@@ -1,12 +1,15 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoFixture;
 using AutoFixture.AutoNSubstitute;
 using EightCare.Application.Collections.Queries.GetCollectionById;
+using EightCare.Application.Common.Exceptions;
 using EightCare.Application.Common.Interfaces;
 using EightCare.Domain.Entities;
 using FluentAssertions;
 using NSubstitute;
+using NSubstitute.ReturnsExtensions;
 using Xunit;
 
 namespace EightCare.Application.UnitTests.Collections.Queries.GetCollectionById
@@ -46,6 +49,20 @@ namespace EightCare.Application.UnitTests.Collections.Queries.GetCollectionById
                 options.ExcludingMissingMembers();
                 return options;
             });
+        }
+
+        [Fact]
+        public void Handle_WithNonExistingCollection_ThrowsException()
+        {
+            // Arrange
+            var query = new GetCollectionByIdQuery(_fixture.Create<Guid>());
+            _collectionRepository.GetByIdAsync(Arg.Any<Guid>()).ReturnsNull();
+
+            // Act
+            var act = _handler.Awaiting(x => x.Handle(query, CancellationToken.None));
+
+            // Assert
+            act.Should().Throw<EntityNotFoundException>();
         }
     }
 }
