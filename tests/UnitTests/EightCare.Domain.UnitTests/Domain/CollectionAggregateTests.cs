@@ -47,8 +47,8 @@ namespace EightCare.Domain.UnitTests.Domain
             // Act
             var createdAnimal = collection.AddNewAnimal
             (
-                expectedAnimal.ScientificName,
-                expectedAnimal.CommonName,
+                expectedAnimal.Species.ScientificName,
+                expectedAnimal.Species.CommonName,
                 expectedAnimal.BuyDate,
                 expectedAnimal.BuyAge
             );

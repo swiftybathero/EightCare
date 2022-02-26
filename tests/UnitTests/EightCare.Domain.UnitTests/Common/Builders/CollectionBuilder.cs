@@ -42,7 +42,13 @@ namespace EightCare.Domain.UnitTests.Common.Builders
 
             foreach (var animal in _animals)
             {
-                var createdAnimal = collection.AddNewAnimal(animal.ScientificName, animal.CommonName, animal.BuyDate, animal.BuyAge);
+                var createdAnimal = collection.AddNewAnimal
+                (
+                    animal.Species.ScientificName, 
+                    animal.Species.CommonName, 
+                    animal.BuyDate, 
+                    animal.BuyAge
+                );
                 createdAnimal.SetId(animal.Id);
             }
 

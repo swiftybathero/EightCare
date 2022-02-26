@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoFixture;
 using EightCare.Domain.Entities;
+using EightCare.Domain.ValueObjects;
 
 namespace EightCare.Domain.UnitTests.Common.Builders
 {
@@ -41,8 +42,7 @@ namespace EightCare.Domain.UnitTests.Common.Builders
             {
                 var animal = new Animal
                 (
-                    _fixture.Create<string>(),
-                    _fixture.Create<string>(),
+                    Species.From(_fixture.Create<string>(), _fixture.Create<string>()),
                     _fixture.Create<DateTime>(),
                     _fixture.Create<int>()
                 );

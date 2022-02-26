@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using EightCare.Domain.Common;
 using EightCare.Domain.Exceptions;
 using EightCare.Domain.Properties;
+using EightCare.Domain.ValueObjects;
 
 namespace EightCare.Domain.Entities
 {
@@ -12,38 +13,22 @@ namespace EightCare.Domain.Entities
         private readonly List<Molt> _molts;
 
         // TODO: Refactor to Species ValueObject
-        public string ScientificName { get; private set; } = string.Empty;
-        public string CommonName { get; private set; } = string.Empty;
+        public Species Species { get; private set; }
         public DateTime BuyDate { get; private set; }
         public int BuyAge { get; private set; }
         public int Age => BuyAge + _molts.Count;
         public IReadOnlyCollection<Feeding> Feedings => _feedings.AsReadOnly();
         public IReadOnlyCollection<Molt> Molts => _molts.AsReadOnly();
 
-        public Animal(string scientificName, string commonName, DateTime buyDate, int buyAge)
+        public Animal(Species species, DateTime buyDate, int buyAge)
         {
-            SetScientificName(scientificName);
-            SetCommonName(commonName);
+            Species = species;
+
             SetBuyDate(buyDate);
             SetBuyAge(buyAge);
 
             _feedings = new List<Feeding>();
             _molts = new List<Molt>();
-        }
-
-        private void SetScientificName(string scientificName)
-        {
-            if (string.IsNullOrEmpty(scientificName))
-            {
-                throw new CollectionDomainException(ExceptionMessages.ScientificNameCannotBeEmpty);
-            }
-
-            ScientificName = scientificName;
-        }
-
-        private void SetCommonName(string commonName)
-        {
-            CommonName = commonName;
         }
 
         private void SetBuyDate(DateTime buyDate)
