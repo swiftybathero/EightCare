@@ -1,0 +1,30 @@
+@startuml
+
+' Class definitions
+class Collection << AggregateRoot >> {
+
+}
+
+class Animal << Entity >> {
+
+}
+
+class Feeding << Entity >> {
+
+}
+
+class Molt << Entity >> {
+
+}
+
+class Species << ValueObject >> {
+
+}
+
+' Relations
+Collection "1" *-- "0..*" Animal : part of <
+Animal "1" *-- "0..*" Feeding : of <
+Animal "1" *-- "0..*" Molt : of <
+Animal *-- Species : of <
+
+@enduml
