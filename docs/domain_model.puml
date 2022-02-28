@@ -1,24 +1,38 @@
-@startuml
+@startuml Domain Model
 
 ' Class definitions
 class Collection << AggregateRoot >> {
-
+  + Guid UserId
+  + string Name
 }
 
 class Animal << Entity >> {
-
+  + string Name
+  + LifeStage Stage
 }
 
 class Feeding << Entity >> {
-
+  + DateTimeOffset Date
+  + string Feeder
+  + int Amount
 }
 
 class Molt << Entity >> {
-
+  + DateTimeOffset Date
 }
 
 class Species << ValueObject >> {
+  + string ScientificName
+  + string CommonName
+}
 
+' Enums
+enum LifeStage {
+  N/A = 0
+  Sling = 1
+  Juvenile = 2
+  Sub-adult = 3
+  Adult = 4
 }
 
 ' Relations
@@ -26,5 +40,6 @@ Collection "1" *-- "0..*" Animal : part of <
 Animal "1" *-- "0..*" Feeding : of <
 Animal "1" *-- "0..*" Molt : of <
 Animal *-- Species : of <
+Animal -right- LifeStage
 
 @enduml
