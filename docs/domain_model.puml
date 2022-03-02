@@ -8,7 +8,12 @@ class Collection << AggregateRoot >> {
 
 class Animal << Entity >> {
   + string Name
+  + DateTimeOffset Received
+  + DateTimeOffset LastRehoused
+  + DateTimeOffset LastHydrated
+  + DateTimeOffset LastSubstrateChanged
   + LifeStage Stage
+  + Sex Sex
 }
 
 class Feeding << Entity >> {
@@ -35,11 +40,20 @@ enum LifeStage {
   Adult = 4
 }
 
+enum Sex {
+  Unknown = 0
+  Male = 1
+  SuspectedMale = 2
+  Female = 3
+  SuspectedFemale = 4
+}
+
 ' Relations
 Collection "1" *-- "0..*" Animal : part of <
 Animal "1" *-- "0..*" Feeding : of <
 Animal "1" *-- "0..*" Molt : of <
 Animal *-- Species : of <
 Animal -right- LifeStage
+Animal -left- Sex
 
 @enduml
