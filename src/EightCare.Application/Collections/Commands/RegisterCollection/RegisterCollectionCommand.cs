@@ -9,15 +9,13 @@ namespace EightCare.Application.Collections.Commands.RegisterCollection
 {
     public class RegisterCollectionCommand : IRequest<Guid>
     {
+        public Guid UserId { get; init; }
         public string Name { get; init; }
-        public string Email { get; init; }
-        public int Age { get; init; }
 
-        public RegisterCollectionCommand(string name, string email, int age)
+        public RegisterCollectionCommand(Guid userId, string name)
         {
+            UserId = userId;
             Name = name;
-            Email = email;
-            Age = age;
         }
     }
 
@@ -32,7 +30,7 @@ namespace EightCare.Application.Collections.Commands.RegisterCollection
 
         public async Task<Guid> Handle(RegisterCollectionCommand request, CancellationToken cancellationToken)
         {
-            var collection = new Collection(request.Name, request.Email, request.Age);
+            var collection = new Collection(request.UserId, request.Name);
 
             await _collectionRepository.AddAsync(collection);
             await _collectionRepository.UnitOfWork.SaveChangesAsync();

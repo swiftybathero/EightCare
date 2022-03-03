@@ -23,18 +23,16 @@ namespace EightCare.Domain.UnitTests.Domain
         public void New_WithCorrectData_CreatesCollection()
         {
             // Arrange
+            var userId = _fixture.Create<Guid>();
             var name = _fixture.Create<string>();
-            var email = _fixture.Create<string>();
-            var age = _fixture.Create<int>();
 
             // Act
-            var collection = new Collection(name, email, age);
+            var collection = new Collection(userId, name);
 
             // Assert
             collection.Should().NotBeNull();
+            collection.UserId.Should().Be(userId);
             collection.Name.Should().Be(name);
-            collection.Email.Should().Be(email);
-            collection.Age.Should().Be(age);
         }
 
         [Fact]

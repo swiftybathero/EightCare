@@ -12,16 +12,15 @@ namespace EightCare.Domain.Entities
     {
         private readonly List<Animal> _animals;
 
+        // TODO: Change to UserId OwnerId
+        public Guid UserId { get; private set; }
         public string Name { get; private set; }
-        public string Email { get; private set; }
-        public int Age { get; private set; }
         public IReadOnlyCollection<Animal> Animals => _animals.AsReadOnly();
 
-        public Collection(string name, string email, int age)
+        public Collection(Guid userId, string name)
         {
+            UserId = userId;
             Name = name;
-            Email = email;
-            Age = age;
 
             _animals = new List<Animal>();
         }

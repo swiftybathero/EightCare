@@ -7,18 +7,16 @@ namespace EightCare.Domain.UnitTests.Common.Builders
 {
     public class CollectionBuilder
     {
+        private readonly Guid _userId;
         private readonly string _name;
-        private readonly string _email;
-        private readonly int _age;
         private List<Animal> _animals = new();
 
         private CollectionBuilder()
         {
             IFixture fixture = new Fixture();
 
+            _userId = fixture.Create<Guid>();
             _name = fixture.Create<string>();
-            _email = fixture.Create<string>();
-            _age = fixture.Create<int>();
         }
 
         public static CollectionBuilder GivenCollection()
@@ -38,7 +36,7 @@ namespace EightCare.Domain.UnitTests.Common.Builders
 
         public Collection Build()
         {
-            var collection = new Collection(_name, _email, _age);
+            var collection = new Collection(_userId, _name);
 
             foreach (var animal in _animals)
             {
