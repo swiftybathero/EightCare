@@ -33,10 +33,10 @@ class Species << ValueObject >> {
 
 ' Enums
 enum LifeStage {
-  N/A = 0
+  NotAvailable = 0
   Sling = 1
   Juvenile = 2
-  Sub-adult = 3
+  SubAdult = 3
   Adult = 4
 }
 

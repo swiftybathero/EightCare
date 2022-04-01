@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using AutoFixture;
 using EightCare.Domain.Entities;
+using EightCare.Domain.Enums;
 using EightCare.Domain.Exceptions;
 using EightCare.Domain.Properties;
 using FluentAssertions;
@@ -47,8 +48,10 @@ namespace EightCare.Domain.UnitTests.Domain
             (
                 expectedAnimal.Species.ScientificName,
                 expectedAnimal.Species.CommonName,
-                expectedAnimal.BuyDate,
-                expectedAnimal.BuyAge
+                expectedAnimal.Name,
+                expectedAnimal.Received,
+                expectedAnimal.LifeStage,
+                expectedAnimal.Sex
             );
 
             // Assert
@@ -66,36 +69,17 @@ namespace EightCare.Domain.UnitTests.Domain
 
             // Act // Assert
             collection.Invoking(x => x.AddNewAnimal
-                  (
-                      scientificName,
-                      _fixture.Create<string>(),
-                      _fixture.Create<DateTime>(),
-                      _fixture.Create<int>()
-                  ))
-                  .Should()
-                  .Throw<CollectionDomainException>()
-                  .WithMessage(ExceptionMessages.ScientificNameCannotBeEmpty);
-        }
-
-        [Theory]
-        [InlineData(0)]
-        [InlineData(-1)]
-        public void AddNewAnimal_InvalidBuyAge_ThrowsDomainException(int buyAge)
-        {
-            // Arrange
-            var collection = GivenCollection().Build();
-
-            // Act // Assert
-            collection.Invoking(x => x.AddNewAnimal
-                  (
-                      _fixture.Create<string>(),
-                      _fixture.Create<string>(),
-                      _fixture.Create<DateTime>(),
-                      buyAge
-                  ))
-                  .Should()
-                  .Throw<CollectionDomainException>()
-                  .WithMessage(ExceptionMessages.BuyAgeCannotBeLowerThanOne);
+                      (
+                          scientificName,
+                          _fixture.Create<string>(),
+                          _fixture.Create<string>(),
+                          _fixture.Create<DateTimeOffset>(),
+                          _fixture.Create<LifeStage>(),
+                          _fixture.Create<Sex>())
+                      )
+                      .Should()
+                      .Throw<CollectionDomainException>()
+                      .WithMessage(ExceptionMessages.ScientificNameCannotBeEmpty);
         }
 
         [Fact]

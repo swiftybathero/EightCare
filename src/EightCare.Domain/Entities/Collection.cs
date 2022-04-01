@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using EightCare.Domain.Common;
+using EightCare.Domain.Enums;
 using EightCare.Domain.Exceptions;
 using EightCare.Domain.Properties;
 using EightCare.Domain.ValueObjects;
@@ -26,9 +27,10 @@ namespace EightCare.Domain.Entities
         }
 
         // TODO: Returning Animal here for Unit Test purposes only - will fix only after ID generation place change
-        public Animal AddNewAnimal(string scientificName, string commonName, DateTime buyDate, int buyAge)
+        public Animal AddNewAnimal(string scientificName, string commonName, string animalName, DateTimeOffset received,
+            LifeStage lifeStage, Sex sex)
         {
-            var newAnimal = new Animal(Species.From(scientificName, commonName), buyDate, buyAge);
+            var newAnimal = new Animal(Species.From(scientificName, commonName), animalName, received, lifeStage, sex);
 
             _animals.Add(newAnimal);
 

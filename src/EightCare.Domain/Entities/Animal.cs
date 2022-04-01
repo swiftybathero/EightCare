@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using EightCare.Domain.Common;
+using EightCare.Domain.Enums;
 using EightCare.Domain.Exceptions;
 using EightCare.Domain.Properties;
 using EightCare.Domain.ValueObjects;
@@ -12,38 +13,28 @@ namespace EightCare.Domain.Entities
         private readonly List<Feeding> _feedings;
         private readonly List<Molt> _molts;
 
-        // TODO: Refactor to Species ValueObject
         public Species Species { get; private set; }
-        public DateTime BuyDate { get; private set; }
-        public int BuyAge { get; private set; }
-        public int Age => BuyAge + _molts.Count;
+        public string Name { get; private set; }
+        public DateTimeOffset Received { get; private set; }
+        public DateTimeOffset LastRehoused { get; private set; }
+        public DateTimeOffset LastHydrated { get; private set; }
+        public DateTimeOffset LastSubstrateChanged { get; private set; }
+        public LifeStage LifeStage { get; private set; }
+        public Sex Sex { get; private set; }
+
         public IReadOnlyCollection<Feeding> Feedings => _feedings.AsReadOnly();
         public IReadOnlyCollection<Molt> Molts => _molts.AsReadOnly();
 
-        public Animal(Species species, DateTime buyDate, int buyAge)
+        public Animal(Species species, string name, DateTimeOffset received, LifeStage lifeStage, Sex sex)
         {
             Species = species;
-
-            SetBuyDate(buyDate);
-            SetBuyAge(buyAge);
+            Name = name;
+            Received = received;
+            LifeStage = lifeStage;
+            Sex = sex;
 
             _feedings = new List<Feeding>();
             _molts = new List<Molt>();
-        }
-
-        private void SetBuyDate(DateTime buyDate)
-        {
-            BuyDate = buyDate;
-        }
-
-        private void SetBuyAge(int buyAge)
-        {
-            if (buyAge < 1)
-            {
-                throw new CollectionDomainException(ExceptionMessages.BuyAgeCannotBeLowerThanOne);
-            }
-
-            BuyAge = buyAge;
         }
 
         public void Feed(int amount = 1, DateTime? feedingDate = null)

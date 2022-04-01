@@ -44,8 +44,10 @@ namespace EightCare.Domain.UnitTests.Common.Builders
                 (
                     animal.Species.ScientificName, 
                     animal.Species.CommonName, 
-                    animal.BuyDate, 
-                    animal.BuyAge
+                    animal.Name,
+                    animal.Received,
+                    animal.LifeStage,
+                    animal.Sex
                 );
                 createdAnimal.SetId(animal.Id);
             }
