@@ -13,7 +13,6 @@ namespace EightCare.Domain.Entities
         private readonly List<Feeding> _feedings;
         private readonly List<Molt> _molts;
 
-        public Species Species { get; private set; }
         public string Name { get; private set; }
         public DateTimeOffset Received { get; private set; }
         public DateTimeOffset LastRehoused { get; private set; }
@@ -21,6 +20,7 @@ namespace EightCare.Domain.Entities
         public DateTimeOffset LastSubstrateChanged { get; private set; }
         public LifeStage LifeStage { get; private set; }
         public Sex Sex { get; private set; }
+        public Species Species { get; private set; }
 
         public IReadOnlyCollection<Feeding> Feedings => _feedings.AsReadOnly();
         public IReadOnlyCollection<Molt> Molts => _molts.AsReadOnly();
@@ -37,7 +37,7 @@ namespace EightCare.Domain.Entities
             _molts = new List<Molt>();
         }
 
-        public void Feed(int amount = 1, DateTime? feedingDate = null)
+        public void Feed(int amount = 1, DateTimeOffset? feedingDate = null, string feeder = "")
         {
             if (amount < 1)
             {
@@ -45,13 +45,13 @@ namespace EightCare.Domain.Entities
             }
 
             // TODO: Provide DateTime.Now from external dependency
-            _feedings.Add(new Feeding(feedingDate ?? DateTime.Now, amount));
+            _feedings.Add(new Feeding(feedingDate ?? DateTimeOffset.UtcNow, amount, feeder));
         }
 
-        public void Molt(DateTime? moltingDate = null)
+        public void Molt(DateTimeOffset? moltingDate = null)
         {
             // TODO: Provide DateTime.Now from external dependency
-            _molts.Add(new Molt(moltingDate ?? DateTime.UtcNow));
+            _molts.Add(new Molt(moltingDate ?? DateTimeOffset.UtcNow));
         }
     }
 }

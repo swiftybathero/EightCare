@@ -37,7 +37,7 @@ namespace EightCare.Domain.Entities
             return newAnimal;
         }
 
-        public void FeedAnimal(Guid animalId, int amount = 1, DateTime? feedingDate = null)
+        public void FeedAnimal(Guid animalId, int amount = 1, DateTimeOffset? feedingDate = null)
         {
             var animalToFeed = FindAnimalById(animalId);
 
@@ -49,7 +49,7 @@ namespace EightCare.Domain.Entities
             animalToFeed.Feed(amount, feedingDate);
         }
 
-        public void ReportMolt(Guid animalId, DateTime? moltingDate = null)
+        public void ReportMolt(Guid animalId, DateTimeOffset? moltingDate = null)
         {
             var moltingAnimal = FindAnimalById(animalId);
 

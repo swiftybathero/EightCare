@@ -89,7 +89,7 @@ namespace EightCare.Domain.UnitTests.Domain
             const int FeedAmount = 1;
 
             var existingAnimalId = _fixture.Create<Guid>();
-            var feedingDate = _fixture.Create<DateTime>();
+            var feedingDate = _fixture.Create<DateTimeOffset>();
             var collection = GivenCollection().WithAnimals(animals => animals.WithIds(existingAnimalId)).Build();
             var animal = collection.Animals.First(x => x.Id == existingAnimalId);
 
@@ -154,7 +154,7 @@ namespace EightCare.Domain.UnitTests.Domain
             var existingAnimalId = _fixture.Create<Guid>();
             var collection = GivenCollection().WithAnimals(animals => animals.WithIds(existingAnimalId)).Build();
 
-            var moltingDate = _fixture.Create<DateTime>();
+            var moltingDate = _fixture.Create<DateTimeOffset>();
             var moltingAnimal = collection.Animals.First(x => x.Id == existingAnimalId);
 
             // Act
