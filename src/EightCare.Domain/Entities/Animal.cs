@@ -20,14 +20,16 @@ namespace EightCare.Domain.Entities
         public DateTimeOffset LastSubstrateChanged { get; private set; }
         public LifeStage LifeStage { get; private set; }
         public Sex Sex { get; private set; }
-        public Species Species { get; private set; }
+        public Species? Species { get; private set; }
 
         public IReadOnlyCollection<Feeding> Feedings => _feedings.AsReadOnly();
         public IReadOnlyCollection<Molt> Molts => _molts.AsReadOnly();
 
-        public Animal(Species species, string name, DateTimeOffset received, LifeStage lifeStage, Sex sex)
+        /// <summary>
+        /// EF Core constructor without Species navigation property
+        /// </summary>
+        private Animal(string name, DateTimeOffset received, LifeStage lifeStage, Sex sex)
         {
-            Species = species;
             Name = name;
             Received = received;
             LifeStage = lifeStage;
@@ -35,6 +37,12 @@ namespace EightCare.Domain.Entities
 
             _feedings = new List<Feeding>();
             _molts = new List<Molt>();
+        }
+
+        public Animal(string name, DateTimeOffset received, LifeStage lifeStage, Sex sex, Species species)
+            : this(name, received, lifeStage, sex)
+        {
+            Species = species;
         }
 
         public void Feed(int amount = 1, DateTimeOffset? feedingDate = null, string feeder = "")

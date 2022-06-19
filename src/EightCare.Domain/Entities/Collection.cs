@@ -30,7 +30,7 @@ namespace EightCare.Domain.Entities
         public Animal AddNewAnimal(string scientificName, string commonName, string animalName, DateTimeOffset received,
             LifeStage lifeStage, Sex sex)
         {
-            var newAnimal = new Animal(Species.From(scientificName, commonName), animalName, received, lifeStage, sex);
+            var newAnimal = new Animal(animalName, received, lifeStage, sex, Species.From(scientificName, commonName));
 
             _animals.Add(newAnimal);
 

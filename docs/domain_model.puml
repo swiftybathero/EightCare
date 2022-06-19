@@ -12,14 +12,14 @@ class Animal << Entity >> {
   + DateTimeOffset LastRehoused
   + DateTimeOffset LastHydrated
   + DateTimeOffset LastSubstrateChanged
-  + LifeStage Stage
+  + LifeStage LifeStage
   + Sex Sex
 }
 
 class Feeding << Entity >> {
   + DateTimeOffset Date
-  + string Feeder
   + int Amount
+  + string Feeder
 }
 
 class Molt << Entity >> {
