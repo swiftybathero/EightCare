@@ -43,11 +43,11 @@ namespace EightCare.Domain.UnitTests.Common.Builders
             {
                 var animal = new Animal
                 (
-                    species: Species.From(_fixture.Create<string>(), _fixture.Create<string>()),
                     name: _fixture.Create<string>(),
                     received: _fixture.Create<DateTimeOffset>(),
                     lifeStage: _fixture.Create<LifeStage>(),
-                    sex: _fixture.Create<Sex>()
+                    sex: _fixture.Create<Sex>(), 
+                    species: Species.From(_fixture.Create<string>(), _fixture.Create<string>())
                 );
 
                 animal.SetId(animalId);

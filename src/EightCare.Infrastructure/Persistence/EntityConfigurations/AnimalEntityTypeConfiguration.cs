@@ -10,6 +10,8 @@ namespace EightCare.Infrastructure.Persistence.EntityConfigurations
         {
             animalBuilder.HasKey(a => a.Id);
 
+            animalBuilder.OwnsOne(a => a.Species);
+            
             animalBuilder.HasMany(a => a.Feedings)
                          .WithOne();
 

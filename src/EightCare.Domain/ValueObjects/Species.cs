@@ -7,22 +7,22 @@ namespace EightCare.Domain.ValueObjects
 {
     public class Species : ValueObject
     {
-        public string ScientificName { get; }
-        public string CommonName { get; }
+        public string ScientificName { get; private set; }
+        public string CommonName { get; private set; }
 
         private Species(string scientificName, string commonName)
         {
-            if (string.IsNullOrEmpty(scientificName))
-            {
-                throw new CollectionDomainException(ExceptionMessages.ScientificNameCannotBeEmpty);
-            }
-
             ScientificName = scientificName;
             CommonName = commonName;
         }
 
         public static Species From(string scientificName, string commonName)
         {
+            if (string.IsNullOrEmpty(scientificName))
+            {
+                throw new CollectionDomainException(ExceptionMessages.ScientificNameCannotBeEmpty);
+            }
+
             return new Species(scientificName, commonName);
         }
 
