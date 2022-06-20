@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using EightCare.Domain.Common;
+using EightCare.Domain.Enums;
 using EightCare.Domain.Exceptions;
 using EightCare.Domain.Properties;
+using EightCare.Domain.ValueObjects;
 
 namespace EightCare.Domain.Entities
 {
@@ -11,57 +13,39 @@ namespace EightCare.Domain.Entities
         private readonly List<Feeding> _feedings;
         private readonly List<Molt> _molts;
 
-        // TODO: Refactor to Species ValueObject
-        public string ScientificName { get; private set; } = string.Empty;
-        public string CommonName { get; private set; } = string.Empty;
-        public DateTime BuyDate { get; private set; }
-        public int BuyAge { get; private set; }
-        public int Age => BuyAge + _molts.Count;
+        public string Name { get; private set; }
+        public DateTimeOffset Received { get; private set; }
+        public DateTimeOffset LastRehoused { get; private set; }
+        public DateTimeOffset LastHydrated { get; private set; }
+        public DateTimeOffset LastSubstrateChanged { get; private set; }
+        public LifeStage LifeStage { get; private set; }
+        public Sex Sex { get; private set; }
+        public Species? Species { get; private set; }
+
         public IReadOnlyCollection<Feeding> Feedings => _feedings.AsReadOnly();
         public IReadOnlyCollection<Molt> Molts => _molts.AsReadOnly();
 
-        public Animal(string scientificName, string commonName, DateTime buyDate, int buyAge)
+        /// <summary>
+        /// EF Core constructor without Species navigation property
+        /// </summary>
+        private Animal(string name, DateTimeOffset received, LifeStage lifeStage, Sex sex)
         {
-            SetScientificName(scientificName);
-            SetCommonName(commonName);
-            SetBuyDate(buyDate);
-            SetBuyAge(buyAge);
+            Name = name;
+            Received = received;
+            LifeStage = lifeStage;
+            Sex = sex;
 
             _feedings = new List<Feeding>();
             _molts = new List<Molt>();
         }
 
-        private void SetScientificName(string scientificName)
+        public Animal(string name, DateTimeOffset received, LifeStage lifeStage, Sex sex, Species species)
+            : this(name, received, lifeStage, sex)
         {
-            if (string.IsNullOrEmpty(scientificName))
-            {
-                throw new CollectionDomainException(ExceptionMessages.ScientificNameCannotBeEmpty);
-            }
-
-            ScientificName = scientificName;
+            Species = species;
         }
 
-        private void SetCommonName(string commonName)
-        {
-            CommonName = commonName;
-        }
-
-        private void SetBuyDate(DateTime buyDate)
-        {
-            BuyDate = buyDate;
-        }
-
-        private void SetBuyAge(int buyAge)
-        {
-            if (buyAge < 1)
-            {
-                throw new CollectionDomainException(ExceptionMessages.BuyAgeCannotBeLowerThanOne);
-            }
-
-            BuyAge = buyAge;
-        }
-
-        public void Feed(int amount = 1, DateTime? feedingDate = null)
+        public void Feed(int amount = 1, DateTimeOffset? feedingDate = null, string feeder = "")
         {
             if (amount < 1)
             {
@@ -69,13 +53,13 @@ namespace EightCare.Domain.Entities
             }
 
             // TODO: Provide DateTime.Now from external dependency
-            _feedings.Add(new Feeding(feedingDate ?? DateTime.Now, amount));
+            _feedings.Add(new Feeding(feedingDate ?? DateTimeOffset.UtcNow, amount, feeder));
         }
 
-        public void Molt(DateTime? moltingDate = null)
+        public void Molt(DateTimeOffset? moltingDate = null)
         {
             // TODO: Provide DateTime.Now from external dependency
-            _molts.Add(new Molt(moltingDate ?? DateTime.UtcNow));
+            _molts.Add(new Molt(moltingDate ?? DateTimeOffset.UtcNow));
         }
     }
 }

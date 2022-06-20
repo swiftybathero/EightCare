@@ -5,9 +5,9 @@ namespace EightCare.Domain.Entities
 {
     public sealed class Molt : Entity
     {
-        public DateTime Date { get; private set; }
+        public DateTimeOffset Date { get; private set; }
 
-        public Molt(DateTime date)
+        public Molt(DateTimeOffset date)
         {
             Date = date;
         }

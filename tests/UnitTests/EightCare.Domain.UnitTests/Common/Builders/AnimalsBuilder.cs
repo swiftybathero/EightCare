@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoFixture;
 using EightCare.Domain.Entities;
+using EightCare.Domain.Enums;
+using EightCare.Domain.ValueObjects;
 
 namespace EightCare.Domain.UnitTests.Common.Builders
 {
@@ -41,10 +43,11 @@ namespace EightCare.Domain.UnitTests.Common.Builders
             {
                 var animal = new Animal
                 (
-                    _fixture.Create<string>(),
-                    _fixture.Create<string>(),
-                    _fixture.Create<DateTime>(),
-                    _fixture.Create<int>()
+                    name: _fixture.Create<string>(),
+                    received: _fixture.Create<DateTimeOffset>(),
+                    lifeStage: _fixture.Create<LifeStage>(),
+                    sex: _fixture.Create<Sex>(), 
+                    species: Species.From(_fixture.Create<string>(), _fixture.Create<string>())
                 );
 
                 animal.SetId(animalId);

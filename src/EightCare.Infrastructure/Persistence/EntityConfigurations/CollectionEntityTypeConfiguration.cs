@@ -9,16 +9,16 @@ namespace EightCare.Infrastructure.Persistence.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Collection> collectionBuilder)
         {
-            collectionBuilder.HasKey(k => k.Id);
+            collectionBuilder.HasKey(c => c.Id);
 
-            collectionBuilder.Property(k => k.Email)
-                         .IsRequired();
+            collectionBuilder.Property(c => c.UserId)
+                             .IsRequired();
 
-            collectionBuilder.HasMany(k => k.Animals)
-                         .WithOne();
+            collectionBuilder.HasMany(c => c.Animals)
+                             .WithOne();
 
             collectionBuilder.Property<DateTime>("Created")
-                         .HasDefaultValueSql("GETDATE()");
+                             .HasDefaultValueSql("GETDATE()");
 
             collectionBuilder.ToTable(nameof(Collection));
         }

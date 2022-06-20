@@ -38,9 +38,8 @@ namespace EightCare.Application.Collections.Queries.GetCollectionById
             return new CollectionDto
             {
                 Id = collection.Id,
-                Name = collection.Name,
-                Email = collection.Email,
-                Age = collection.Age,
+                UserId = collection.UserId,
+                Name = collection.Name
             };
         }
     }

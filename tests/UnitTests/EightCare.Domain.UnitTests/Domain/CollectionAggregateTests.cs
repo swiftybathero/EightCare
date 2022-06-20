@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using AutoFixture;
 using EightCare.Domain.Entities;
+using EightCare.Domain.Enums;
 using EightCare.Domain.Exceptions;
 using EightCare.Domain.Properties;
 using FluentAssertions;
@@ -23,18 +24,16 @@ namespace EightCare.Domain.UnitTests.Domain
         public void New_WithCorrectData_CreatesCollection()
         {
             // Arrange
+            var userId = _fixture.Create<Guid>();
             var name = _fixture.Create<string>();
-            var email = _fixture.Create<string>();
-            var age = _fixture.Create<int>();
 
             // Act
-            var collection = new Collection(name, email, age);
+            var collection = new Collection(userId, name);
 
             // Assert
             collection.Should().NotBeNull();
+            collection.UserId.Should().Be(userId);
             collection.Name.Should().Be(name);
-            collection.Email.Should().Be(email);
-            collection.Age.Should().Be(age);
         }
 
         [Fact]
@@ -47,10 +46,12 @@ namespace EightCare.Domain.UnitTests.Domain
             // Act
             var createdAnimal = collection.AddNewAnimal
             (
-                expectedAnimal.ScientificName,
-                expectedAnimal.CommonName,
-                expectedAnimal.BuyDate,
-                expectedAnimal.BuyAge
+                expectedAnimal.Species.ScientificName,
+                expectedAnimal.Species.CommonName,
+                expectedAnimal.Name,
+                expectedAnimal.Received,
+                expectedAnimal.LifeStage,
+                expectedAnimal.Sex
             );
 
             // Assert
@@ -68,36 +69,17 @@ namespace EightCare.Domain.UnitTests.Domain
 
             // Act // Assert
             collection.Invoking(x => x.AddNewAnimal
-                  (
-                      scientificName,
-                      _fixture.Create<string>(),
-                      _fixture.Create<DateTime>(),
-                      _fixture.Create<int>()
-                  ))
-                  .Should()
-                  .Throw<CollectionDomainException>()
-                  .WithMessage(ExceptionMessages.ScientificNameCannotBeEmpty);
-        }
-
-        [Theory]
-        [InlineData(0)]
-        [InlineData(-1)]
-        public void AddNewAnimal_InvalidBuyAge_ThrowsDomainException(int buyAge)
-        {
-            // Arrange
-            var collection = GivenCollection().Build();
-
-            // Act // Assert
-            collection.Invoking(x => x.AddNewAnimal
-                  (
-                      _fixture.Create<string>(),
-                      _fixture.Create<string>(),
-                      _fixture.Create<DateTime>(),
-                      buyAge
-                  ))
-                  .Should()
-                  .Throw<CollectionDomainException>()
-                  .WithMessage(ExceptionMessages.BuyAgeCannotBeLowerThanOne);
+                      (
+                          scientificName,
+                          _fixture.Create<string>(),
+                          _fixture.Create<string>(),
+                          _fixture.Create<DateTimeOffset>(),
+                          _fixture.Create<LifeStage>(),
+                          _fixture.Create<Sex>())
+                      )
+                      .Should()
+                      .Throw<CollectionDomainException>()
+                      .WithMessage(ExceptionMessages.ScientificNameCannotBeEmpty);
         }
 
         [Fact]
@@ -107,7 +89,7 @@ namespace EightCare.Domain.UnitTests.Domain
             const int FeedAmount = 1;
 
             var existingAnimalId = _fixture.Create<Guid>();
-            var feedingDate = _fixture.Create<DateTime>();
+            var feedingDate = _fixture.Create<DateTimeOffset>();
             var collection = GivenCollection().WithAnimals(animals => animals.WithIds(existingAnimalId)).Build();
             var animal = collection.Animals.First(x => x.Id == existingAnimalId);
 
@@ -172,7 +154,7 @@ namespace EightCare.Domain.UnitTests.Domain
             var existingAnimalId = _fixture.Create<Guid>();
             var collection = GivenCollection().WithAnimals(animals => animals.WithIds(existingAnimalId)).Build();
 
-            var moltingDate = _fixture.Create<DateTime>();
+            var moltingDate = _fixture.Create<DateTimeOffset>();
             var moltingAnimal = collection.Animals.First(x => x.Id == existingAnimalId);
 
             // Act

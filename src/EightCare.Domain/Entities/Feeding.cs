@@ -5,13 +5,15 @@ namespace EightCare.Domain.Entities
 {
     public sealed class Feeding : Entity
     {
-        public DateTime Date { get; private set; }
+        public DateTimeOffset Date { get; private set; }
         public int Amount { get; private set; }
+        public string Feeder { get; private set; }
 
-        public Feeding(DateTime date, int amount)
+        public Feeding(DateTimeOffset date, int amount, string feeder)
         {
             Date = date;
             Amount = amount;
+            Feeder = feeder;
         }
     }
 }
