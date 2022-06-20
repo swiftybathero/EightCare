@@ -1,10 +1,11 @@
-namespace EightCare.Domain.Enums;
-
-public enum LifeStage
+namespace EightCare.Domain.Enums
 {
-    NotAvailable = 0,
-    Sling = 1,
-    Juvenile = 2,
-    SubAdult = 3,
-    Adult = 4
+    public enum LifeStage
+    {
+        NotAvailable = 0,
+        Sling = 1,
+        Juvenile = 2,
+        SubAdult = 3,
+        Adult = 4
+    }   
 }
