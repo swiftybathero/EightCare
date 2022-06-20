@@ -1,10 +1,11 @@
-namespace EightCare.Domain.Enums;
-
-public enum Sex
+namespace EightCare.Domain.Enums
 {
-    Unknown = 0,
-    Male = 1,
-    SuspectedMale = 2,
-    Female = 3,
-    SuspectedFemale = 4
+    public enum Sex
+    {
+        Unknown = 0,
+        Male = 1,
+        SuspectedMale = 2,
+        Female = 3,
+        SuspectedFemale = 4
+    }   
 }
