@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace EightCare.Domain.Common
 {
+    [ExcludeFromCodeCoverage]
     public abstract class ValueObject
     {
         protected abstract IEnumerable<object?> GetEqualityComponents();
